@@ -5,7 +5,25 @@ Timeframes : H1 - M15 -M5
 Fibonacci Settings :
 -0.27, 0.0, 0.5, 0.618, 0.786, 0.893, 1.0 .
 
-1. In H1, Identify Trend In 200 Bars. Find All HH And HL / LH And LL. 
+Trade Management :
+Fixed LOT 0.01
+StopLoss On Fibonacci 0.893
+Risk:Reward 1:3
+Break-Even
+Trailing StopLoss To TP1/TP2/TP3
+
+Dashboard Visual :
+- Balance - Equity
+- Winrate - Floating PnL
+- Avtive Entry Zone In Price To Price
+- Entry Confirmations Satisfied
+# Main Background Color = Dark Beige
+# Assigned Background Color For Each Texts = Lighter Beige
+# Use "DrawLabel" For Each Dashboard Texts Lines
+
+Whole EA Strategy :
+
+1. In H1, Identify Trend In 200 Bars. Find All HH And HL / LH And LL Only To Make Sure And Be Aware Of Any Trend And Structure Shifting.
 
 2. Then Still In H1, Identify High And Low Or Structure Shift Confirmed Trend From Previous 200 Bars HH,HL And LH,LL In 100 Bars : 
 - If In Latest 100 Bars Has HH And HL Meaning Trend Is UpTrend.
@@ -21,30 +39,49 @@ Fibonacci Settings :
 -  Immediately After Price Touches Fibonacci Extension 0.618 - 0.786, M5 Takes 15 Bars Before The Touch, And Takes 20 Bars While And After The Touch For Confirmations Analyze.
 -  Immediately After Price Touches Fibonacci Extension 0.618 - 0.786, M15 Takes 8 Bars Before The Touch, And Takes 10 Bars While And After The Touch For Confirmations Analyze.
 
-6. After M15 And M5 Taken Each Bars For Each Timeframes, Confirms Entry With At Least 2 Of 4 Confirmations Satisfied :
-- 1. M15 Or M5 Candle Rejection. This is a visual story of a failed mission. One side tried to push the price somewhere, but the other side violently pushed them back before the candle timer ran out.
-      Sell Conditions : The Pinbar (The Hammer), a candle with a tiny body at the very top and a very long tail (wick) sticking out of the bottom. It means sellers successfully pushed Price deep into Fibonacci 0.618 - 0.786 Zone,
-                        but before the candle could finish, a massive wave of buyers stepped in and forced the price all the way back up. The tail must be at least twice as long as the body.
-      Buy Condition : This is a two-candle takeover. Candle 1 is a red candle moving down into Fibonacci 0.618 - 0.786 Zone. Candle 2 is a massive green candle that starts lower than Candle 1 but explodes upward,
-                        completely swallowing or "engulfing" the entire height of the red candle's solid body. It shows an immediate, aggressive shift in power
-- 2. M15 Break of Structure (BOS). A Break of Structure is proof that a trend is healthy and moving forward. It requires the market to clear out old boundaries decisively.
-      Sell Condition : Bearish BOS (Downtrend), Find the lowest point of the last downward wave (the previous Swing Low). A red candle must push below that floor and close its solid body underneath it.
-      Buy Condition : Bullish BOS (Uptrend), Find the highest point of the last upward wave (the previous Swing High). A new green candle must push past that peak and close its solid body above that old high line.
-      BOS Rule : If a candle only pokes its thin wick through the line but the solid body shrinks back and closes inside, it is a fake-out, not a BOS.
-- 3. M5 Change of Character (CHoCH). CHoCH happens when a trend flips direction for the first time. It is the very first sign of a trend reversal.
-      Sell Condition : Bearish CHoCH :
-           - As Price climbs into Fibonacci 0.618 - 0.786 zone, it was making a staircase upward (higher highs and higher lows).
-           - Spot the final, highest candle at the very top of the Fibonacci 0.618 - 0.786 zone.
-           - Spot just slightly to the recent candles and find the last minor "staircase peak" (the last minor low) that caused that final up.
-           - When a new red candle aggressively charges downward and closes its solid body below that last minor peak, the character of the market has changed from bullish to bearish.
-      Buy Condition : Bullish CHoCH :
-           - As Price falls into Fibonacci 0.618 - 0.786 zone, it was making a staircase downward (lower highs and lower lows).
-           - Spot the final, lowest candle at the very bottom of the Fibonacci 0.618 - 0.786 zone.
-           - Spot just slightly to the recent candles and find the last minor "staircase peak" (the last minor high) that caused that final drop.
-           - When a new green candle aggressively charges upward and closes its solid body above that last minor peak, the character of the market has changed from bearish to bullish.
-- 4. M5 Equal Highs (EQH) & Equal Lows (EQL). These look like price has hit a flat, solid wall. In the Fibonacci 0.618 - 0.786 Zones.
-      Sell Condition (EQH) : two or more candles whose top wicks peak out at the exact same price level, forming a straight horizontal ceiling. It looks like a double or triple top
-      Buy Condition (EQL) : two or more candles whose bottom wicks drop down and step on the exact same price line, forming a flat floor.
+6. After M15 And M5 Taken Each Bars For Each Timeframes, Confirms Entry With At Least 2 Of 4 Confirmations, And At Least 1 Of 3 Indicators Satisfied, Then Place Our Entry :
+
+  # 4 Confirmations :
+
+       - 1. (M15 Or M5) Candle Rejection. This is a visual story of a failed mission. One side tried to push the price somewhere, but the other side violently pushed them back before the candle timer ran out.
+                Sell Conditions : The Pinbar (The Hammer), a candle with a tiny body at the very top and a very long tail (wick) sticking out of the bottom. It means sellers successfully pushed Price deep into Fibonacci 0.618 - 0.786 Zone,
+                                  but before the candle could finish, a massive wave of buyers stepped in and forced the price all the way back up. The tail must be at least twice as long as the body.
+                Buy Condition : This is a two-candle takeover. Candle 1 is a red candle moving down into Fibonacci 0.618 - 0.786 Zone. Candle 2 is a massive green candle that starts lower than Candle 1 but explodes upward,
+                                  completely swallowing or "engulfing" the entire height of the red candle's solid body. It shows an immediate, aggressive shift in power
+       - 2. (M15) Break of Structure (BOS). A Break of Structure is proof that a trend is healthy and moving forward. It requires the market to clear out old boundaries decisively.
+                Sell Condition : Bearish BOS (Downtrend), Find the lowest point of the last downward wave (the previous Swing Low). A red candle must push below that floor and close its solid body underneath it.
+                Buy Condition : Bullish BOS (Uptrend), Find the highest point of the last upward wave (the previous Swing High). A new green candle must push past that peak and close its solid body above that old high line.
+                BOS Rule : If a candle only pokes its thin wick through the line but the solid body shrinks back and closes inside, it is a fake-out, not a BOS.
+       - 3. (M5) Change of Character (CHoCH). CHoCH happens when a trend flips direction for the first time. It is the very first sign of a trend reversal.
+               Sell Condition : Bearish CHoCH :
+                   - As Price climbs into Fibonacci 0.618 - 0.786 zone, it was making a staircase upward (higher highs and higher lows).
+                   - Spot the final, highest candle at the very top of the Fibonacci 0.618 - 0.786 zone.
+                   - Spot just slightly to the recent candles and find the last minor "staircase peak" (the last minor low) that caused that final up.
+                   - When a new red candle aggressively charges downward and closes its solid body below that last minor peak, the character of the market has changed from bullish to bearish.
+               Buy Condition : Bullish CHoCH :
+                   - As Price falls into Fibonacci 0.618 - 0.786 zone, it was making a staircase downward (lower highs and lower lows).
+                   - Spot the final, lowest candle at the very bottom of the Fibonacci 0.618 - 0.786 zone.
+                   - Spot just slightly to the recent candles and find the last minor "staircase peak" (the last minor high) that caused that final drop.
+                   - When a new green candle aggressively charges upward and closes its solid body above that last minor peak, the character of the market has changed from bearish to bullish.
+       - 4. (M5) Equal Highs (EQH) & Equal Lows (EQL). These look like price has hit a flat, solid wall. In the Fibonacci 0.618 - 0.786 Zones.
+              Sell Condition (EQH) : two or more candles whose top wicks peak out at the exact same price level, forming a straight horizontal ceiling. It looks like a double or triple top
+              Buy Condition (EQL) : two or more candles whose bottom wicks drop down and step on the exact same price line, forming a flat floor.
+ 
+  # 3 Indicators :
+
+       - 1. (M15) Relative Strength Index (RSI).  Think of the RSI as a speedometer that measures how fast car prices are moving, and whether buyers or sellers are getting tired. It ranges from a score of 0 to 100, 
+            It tells if the market is over-pumped (Overbought) or completely exhausted (Oversold).
+              Sell Condition : When Price drops into Fibonacci 0.618 – 0.786  zone, the RSI on the M15 chart will often drop below 30 (meaning sellers are exhausted). should look for the moment the RSI line crosses back above 30 or 50. This proves that buyers are stepping back in.
+              Buy Condition : When Price rises into Fibonacci 0.618 – 0.786  zone, look for the RSI to climb above 70 and then cross back below 70 or 50, proving sellers are taking control.
+       - 2. (M15) Moving Average Convergence Divergence (MACD). Think of the MACD as a momentum camera. It doesn't look at individual price ticks; it looks at the overall shifting weight of the market,
+            It consists of two lines and a bar chart (the histogram) that moves above and below a central "0" line.  It filters out "fake" price movements and tells you when the actual shift in power happens.
+              Sell Condition : The easiest rule is the central 0 line. In A Sell Condition trade, wait for the MACD bars to switch from being above 0 (green/positive) to printing above 0 (red/negative).
+              Buy Condition : The easiest rule is the central 0 line. In A Buy Condition trade, wait for the MACD bars to switch from being below 0 (red/negative) to printing above 0 (green/positive).
+       - 3. (H1 Or M15) Exponential Moving Average (EMA50). Think of the EMA 50 as a moving floor or ceiling. It takes the average price of the last 50 candles but puts more weight on the most recent candles so it reacts quickly to sudden news or movements.
+            It acts as a visual trend barrier. If the price is above it, the immediate trend is up. If the price is below it, the immediate trend is down.
+              The Bounce Filter : Fibonacci  0.618 – 0.786  zone is a theoretical area where price might stop. The EMA 50 gives it a physical barrier.
+              Sell Condition :  Wait for the price to hit Fibonacci 0.618 – 0.786 zone, struggle to go higher, and then close a candle completely below the M15 EMA 50 line. This acts as proof that the "ceiling" held.
+              Buy Condition :  Wait for the price to hit Fibonacci 0.618 – 0.786 zone, struggle to go lower, and then close a candle completely above the M15 EMA 50 line. This acts as proof that the "floor" held.
 
 
 
@@ -52,21 +89,5 @@ Fibonacci Settings :
 
 
 
-
-
-
-
-
-
-Trade Manager :
-- Fixed Lot 0.01
-- StopLoss On Fibonacci Extension 0.893
-- Risk:Reward 1:3 With, BE And Trailing SL
-
-
-
-Confirmations = Second Touch In M5, Built EQL/EQH
-
-M15 = 15 Bars. M5 = 35 Bars
 
 
