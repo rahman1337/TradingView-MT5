@@ -3,13 +3,9 @@
 Fibonacci Settings :
 -0.27, 0.0, 0.5, 0.618, 0.786, 0.893, 1.0 .
 
-Trade Manager :
-- StopLoss On Fibonacci Extension 0.893
-- Risk:Reward 1:3 With, BE And Trailing SL
-
 1. In H1, Identify Trend In 200 Bars. Find All HH And HL / LH And LL. 
 
-2. Then In H1, Identify High And Low Or Structure Shift Confirmed Trend From Previous 200 Bars HH,HL And LH,LL In 100 Bars : 
+2. Then Still In H1, Identify High And Low Or Structure Shift Confirmed Trend From Previous 200 Bars HH,HL And LH,LL In 100 Bars : 
 - If In Latest 100 Bars Has HH And HL Meaning Trend Is UpTrend.
 - If In Latest 100 Bars Has LH And LL Meaning Trend Is Downtrend.
 
@@ -17,15 +13,54 @@ Trade Manager :
 - If Trend Is Uptrend, Find That Latest HL Of 100 Bars And Mark It With Fibonacci Extension 1.0, And Find That Latest HH Of 100 Bars And Mark With Fibonacci Extension 0.0 .
 - If Trend Is Downtrend, Find That Latest LL Of 100 Bars And Mark It With Fibonacci Extension 0.0, And Find That Latest LH Of 100 Bars And Mark With Fibonacci Extension 1.0 .
 
-4. Once Fibonacci Is Placed, In H1 Mark Zone/Price Fibonacci Extension 0.618 - 0.786 As Entry Zone. Wait For The Price To Return To Marked H1 Fibonacci 0.618 - 0.786 .
+4. Once Fibonacci Is Placed On Latest High And Low H1, In H1 Mark Zone/Price Fibonacci Extension 0.618 - 0.786 As Entry Zone. Wait For The Price To Return To Marked H1 Fibonacci 0.618 - 0.786 .
 
-5. Then Go To In M15, In 0.618 - Identify 
+5. Then While Price Is In Our Fibonacci Extenzion 0.618 - 0.786, We Drop Timeframes To M15 And M5 To Analyze Our Entry Confirmations :
+-  Immediately After Price Touches Fibonacci Extension 0.618 - 0.786, M5 Takes 15 Bars Before The Touch, And Takes 20 Bars While And After The Touch For Confirmations Analyze.
+-  Immediately After Price Touches Fibonacci Extension 0.618 - 0.786, M15 Takes 8 Bars Before The Touch, And Takes 10 Bars While And After The Touch For Confirmations Analyze.
 
+6. After M15 And M5 Taken Each Bars For Each Timeframes, Confirms Entry With At Least 2 Of 4 Confirmations Satisfied :
+- 1. M15 Break of Structure (BOS). A Break of Structure is proof that a trend is healthy and moving forward. It requires the market to clear out old boundaries decisively.
+      Sell Condition : Bearish BOS (Downtrend), Find the lowest point of the last downward wave (the previous Swing Low). A red candle must push below that floor and close its solid body underneath it.
+      Buy Condition : Bullish BOS (Uptrend), Find the highest point of the last upward wave (the previous Swing High). A new green candle must push past that peak and close its solid body above that old high line.
+      BOS Rule : If a candle only pokes its thin wick through the line but the solid body shrinks back and closes inside, it is a fake-out, not a BOS.
+- 2. M5 Change of Character (CHoCH). CHoCH happens when a trend flips direction for the first time. It is the very first sign of a trend reversal.
+      Sell Condition : Bullish CHoCH :
+           - As Price falls into Fibonacci 0.618 - 0.786 zone, it was making a staircase downward (lower highs and lower lows).
+           - Spot the final, lowest candle at the very bottom of the Fibonacci 0.618 - 0.786 zone.
+           - Spot just slightly to the left candles and find the last minor "staircase peak" (the last minor high) that caused that final drop.
+           - When a new green candle aggressively charges upward and closes its solid body above that last minor peak, the character of the market has changed from bearish to bullish.
+      Buy Condition : Bullish CHoCH :
+           - As Price falls into Fibonacci 0.618 - 0.786 zone, it was making a staircase downward (lower highs and lower lows).
+           - Spot the final, lowest candle at the very bottom of the Fibonacci 0.618 - 0.786 zone.
+           - Spot just slightly to the left candles and find the last minor "staircase peak" (the last minor high) that caused that final drop.
+           - When a new green candle aggressively charges upward and closes its solid body above that last minor peak, the character of the market has changed from bearish to bullish.
+
+- 3. M5 Equal Highs (EQH) & Equal Lows (EQL). These look like price has hit a flat, solid wall. In the Fibonacci 0.618 - 0.786 Zones.
+      Sell Condition (EQH) : two or more candles whose top wicks peak out at the exact same price level, forming a straight horizontal ceiling. It looks like a double or triple top
+      Buy Condition (EQL) : two or more candles whose bottom wicks drop down and step on the exact same price line, forming a flat floor.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Trade Manager :
+- Fixed Lot 0.01
+- StopLoss On Fibonacci Extension 0.893
+- Risk:Reward 1:3 With, BE And Trailing SL
 
 
 
 Confirmations = Second Touch In M5, Built EQL/EQH
 
-
+M15 = 15 Bars. M5 = 35 Bars
 
 
