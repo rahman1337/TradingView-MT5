@@ -47,11 +47,43 @@ Whole EA Strategy :
 
   # 4 Confirmations :
 
-       - 1. (M15 Or M5) Candle Rejection. This is a visual story of a failed mission. One side tried to push the price somewhere, but the other side violently pushed them back before the candle timer ran out.
-                Sell Conditions : The Pinbar (The Hammer), a candle with a tiny body at the very top and a very long tail (wick) sticking out of the bottom. It means sellers successfully pushed Price deep into Fibonacci 0.618 - 0.786 Zone,
-                                  but before the candle could finish, a massive wave of buyers stepped in and forced the price all the way back up. The tail must be at least twice as long as the body.
-                Buy Condition : This is a two-candle takeover. Candle 1 is a red candle moving down into Fibonacci 0.618 - 0.786 Zone. Candle 2 is a massive green candle that starts lower than Candle 1 but explodes upward,
-                                  completely swallowing or "engulfing" the entire height of the red candle's solid body. It shows an immediate, aggressive shift in power
+       - 1. (M15 Or M5) Candle Rejection (Only 1 Of 4 Needed To Satisfy Entry). This is a visual story of a failed mission. One side tried to push the price somewhere, but the other side violently pushed them back before the candle timer ran out.
+                Sell Conditions : 
+                     -- 1. EVENING STAR :
+                          Candle 1: A large, solid bullish candle continuing an upward pushing upward.
+                          Candle 2: A small-bodied candle (or Doji) at the top. Buyers are stalling.
+                          Candle 3: A large, solid bearish candle closing deep (at least 50%) into the body of Candle 1.
+                          Execution: Enter at the close of Candle 3.
+                     -- 2. BEARISH ENGULFING :
+                          Candle 1: A small bullish candle resting around ceiling.
+                          Candle 2: A large bearish candle where the body completely wraps around and closes below the open of Candle 1.
+                          Execution: Enter at the close of Candle 2.
+                     -- 3. SELL OVERLAP TRIGGER :
+                          Candle 1: The final bullish candle that prints as price climbs upward.
+                          Candle 2: The next candle shifts bearish and drops low enough to close below the open price (the bottom of the body) of Candle 1.
+                          Execution: Enter the moment Candle 2 closes below that structural line.
+                     -- 4. SELL LIQUIDITY SWEEP :
+                          Candle 1: Price pushes cleanly up through a known major high level (marked by the double horizontal line ===).
+                          Candle 2: Price aggressively rejects downward. It leaves a long top wick poking through the line, closing with a heavy, strong bearish body back below the key level.
+                          Execution: Enter immediately at the close of Candle 2.
+                Buy Condition :
+                     -- 1. MORNING STAR :
+                          Candle 1: A large, solid bearish candle continuing the current markdown trend.
+                          Candle 2: A small-bodied candle (or Doji) that gaps or pushes lower but fails to expand down. It shows sellers are losing steam.
+                          Candle 3: A large, solid bullish candle that opens higher and closes at least 50% or deeper into the body of Candle 1.
+                          Execution: Enter at the close of Candle 3.
+                     -- 2. BULLISH ENGULFING :
+                          Candle 1: A small bearish candle resting around floor.
+                          Candle 2: A large bullish candle where the body completely wraps around and closes above the open of Candle 1.
+                          Execution: Enter at the close of Candle 2.
+                     -- 3. BUY OVERLAP TRIGGER :
+                          Candle 1: The final bearish candle that prints as price reaching floor.
+                          Candle 2: The next candle shifts bullish and manages to stretch upward to close above the open price (the top of the body) of Candle 1.
+                          Execution: Enter the moment Candle 2 closes above that specific structural line.
+                     -- 4. BUY LIQUIDITY SWEEP :
+                          Candle 1: Price drops sharply down through a known major low level (marked by the double horizontal line ===).
+                          Candle 2: Price aggressively snaps back up. It leaves behind a long bottom wick below the line, closing with a heavy, strong bullish body back above the key level.
+                          Execution: Enter immediately at the close of Candle 2.
        - 2. (M15) Break of Structure (BOS). A Break of Structure is proof that a trend is healthy and moving forward. It requires the market to clear out old boundaries decisively.
                 Sell Condition : Bearish BOS (Downtrend), Find the lowest point of the last downward wave (the previous Swing Low). A red candle must push below that floor and close its solid body underneath it.
                 Buy Condition : Bullish BOS (Uptrend), Find the highest point of the last upward wave (the previous Swing High). A new green candle must push past that peak and close its solid body above that old high line.
