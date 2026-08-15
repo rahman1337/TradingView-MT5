@@ -47,7 +47,7 @@ Whole EA Strategy :
 
   # 4 Confirmations :
 
-       - 1. (M15 Or M5) Candle Rejection (Only 1 Of 4 Needed To Satisfy Entry). This is a visual story of a failed mission. One side tried to push the price somewhere, but the other side violently pushed them back before the candle timer ran out.
+       - 1. (M15 Or M5) Candle Rejection (Only 1 Of 4 Needed To Satisfy Candle Rejection Confirmation). This is a visual story of a failed mission. One side tried to push the price somewhere, but the other side violently pushed them back before the candle timer ran out.
                 Sell Conditions : 
                      -- 1. EVENING STAR :
                           Candle 1: A large, solid bullish candle continuing an upward pushing upward.
