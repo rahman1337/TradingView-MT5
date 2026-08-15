@@ -1,0 +1,31 @@
+
+
+Fibonacci Settings :
+-0.27, 0.0, 0.5, 0.618, 0.786, 0.893, 1.0 .
+
+Trade Manager :
+- StopLoss On Fibonacci Extension 0.893
+- Risk:Reward 1:3 With, BE And Trailing SL
+
+1. In H1, Identify Trend In 200 Bars. Find All HH And HL / LH And LL. 
+
+2. Then In H1, Identify High And Low Or Structure Shift Confirmed Trend From Previous 200 Bars HH,HL And LH,LL In 100 Bars : 
+- If In Latest 100 Bars Has HH And HL Meaning Trend Is UpTrend.
+- If In Latest 100 Bars Has LH And LL Meaning Trend Is Downtrend.
+
+3. Find High And Low Of Confirmed 100 Bars Latest Trend And Place Fibonacci Extension :
+- If Trend Is Uptrend, Find That Latest HL Of 100 Bars And Mark It With Fibonacci Extension 1.0, And Find That Latest HH Of 100 Bars And Mark With Fibonacci Extension 0.0 .
+- If Trend Is Downtrend, Find That Latest LL Of 100 Bars And Mark It With Fibonacci Extension 0.0, And Find That Latest LH Of 100 Bars And Mark With Fibonacci Extension 1.0 .
+
+4. Once Fibonacci Is Placed, In H1 Mark Zone/Price Fibonacci Extension 0.618 - 0.786 As Entry Zone. Wait For The Price To Return To Marked H1 Fibonacci 0.618 - 0.786 .
+
+5. Then Go To In M15, In 0.618 - Identify 
+
+
+
+
+Confirmations = Second Touch In M5, Built EQL/EQH
+
+
+
+
