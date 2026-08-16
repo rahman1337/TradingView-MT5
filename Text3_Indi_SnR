@@ -4,8 +4,8 @@ Take All The Times You Need, Build All The Longest Lined File You Need Even It C
 Build All The Larget Sized File You Need Even It Need Hundreds Of KB Even MB. Do Your Best With The Exact Rules Below.
 
 Symbol : XAUUSD
-Setup Confluence Timeframes : H4 - H1 - M30 - M15
-Entry Confluence Timeframes : M15 - M5
+Setup Confluence Timeframes (HTF) : H4 - H1 - M30 - M15
+Entry Confluence Timeframes (LTF) : M15 - M5
 
 Trade Management :
 Fixed LOT 0.01
@@ -26,6 +26,12 @@ Dashboard Visual :
 # Main Background Color = Dark Beige
 # Assigned Background Color For Each Texts = Lighter Beige
 # Use "DrawLabel" For Each Dashboard Texts Lines
+
+Chart Visual :
+- Remove Grids
+- Change Bearish Candle To Red Colored
+- Change Bullish Candle To Green Colored
+- Draw All Identified HTF Entry Lines On M5 Opened Chart
 
 Whole EA Strategy :
 
@@ -113,12 +119,7 @@ Phase 2. After All H4, H1, M30, And M15 Support, Resistance, SBR, And RBS Lines 
                   -- 2. Overbought Condition: The RSI on the 5m Or 15m chart rises above the 70 line.
                   -- 3. Bearish Divergence (Strongest Signal): Price makes a higher high inside the Around The Line, but RSI makes a lower high.
                   -- 4. Trigger: Enter when the RSI line crosses back below the 70 level on a closed candle.
-
-
-
-
-
-      Buy Condition : When Price drops into Entry Line, the RSI on the M15 chart will often drop below 30 (meaning sellers are exhausted). should look for the moment the RSI line crosses back above 30 or 50. This proves that buyers are stepping back in.
+              Buy Condition : 
 
 
 
