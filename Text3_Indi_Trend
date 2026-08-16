@@ -5,21 +5,21 @@ Take All The Times You Need, Build All The Longest Lined File You Need, Build Al
 Symbol : XAUUSD
 Timeframes : H4 - H1 - M15 -M5
 
-Fibonacci Settings :
--0.27, 0.0, 0.5, 0.618, 0.786, 0.893, 1.0 .
-
 Trade Management :
 Fixed LOT 0.01
-StopLoss On Fibonacci 0.893
+StopLoss : 50Pips
+TakeProfit : TP1 = 80Pips, TP2 = 100Pips, TP3 = 150Pips, TP4 = 200Pips
 Risk:Reward 1:3
 Break-Even Once Price Reaches 0.5R
-Trailing StopLoss To TP1/TP2/TP3
-- TP1 = R:R 1:1 -> Trails SL To TP 1 When Price Reached 1.2R
+Trailing StopLoss To TP1/TP2/TP3 :
+- Trails SL To TP1 When Price Reached TP1 + 30Pips.
+- Trails SL To TP2 When Price Reached TP2 + 30Pips.
+- Trails SL To TP3 When Price Reached TP3 + 30Pips.
 
 Dashboard Visual :
 - Balance - Equity
 - Winrate - Floating PnL
-- Avtive Entry Zone In Price To Price
+- Avtive Entry Zone
 - Entry Confirmations Satisfied
 # Main Background Color = Dark Beige
 # Assigned Background Color For Each Texts = Lighter Beige
@@ -27,28 +27,16 @@ Dashboard Visual :
 
 Whole EA Strategy :
 
-Phase 1. In Timeframes H4 And H1 Identify Trend By Collecting HH, HL/LH, LL
-   Higher highs and higher lows form an uptrend where buyers control the market.
-   Lower highs and lower lows form a downtrend where sellers take over.
-   These turning points (swings) are mapped out by groups of price candles showing shifts in market momentum.
-      - Higher High (HH): A peak price point that breaks above the previous peak.
-      - Higher Low (HL): A pullback low that stays higher than the previous trough.
-      - Lower High (LH): A recovery peak that fails to reach the previous high.
-      - Lower Low (LL): A drop that falls underneath the previous valley low.
-      - Uptrend: A sequence of HH and HL meaning buyers push prices higher step by step.
-      - Downtrend: A sequence of LH and LL meaning sellers force prices lower step by step.
-   The Candles That Build Highs and Lows :
-   Swings are usually defined by a simple three-candle pattern centered around wicks:
-     • Swing High Candle Formation:
-        - First Candle: Rises, creating a local high.
-        - Middle Candle: Shoots higher, printing the highest peak of the three via its top wick.
-        - Third Candle: Closes lower than the middle candle's peak, confirming the rejection.
-        - Wick meaning: The top wick shows buyers pushed the price up, but sellers pushed it back down before the candle closed.
-     • Swing Low Candle Formation:
-        - First Candle: Drops down.
-        - Middle Candle: Dips further, printing the lowest valley point via its bottom wick.
-        - Third Candle: Rises back up, closing higher than the middle candle's bottom.
-        - Wick meaning: The bottom wick shows sellers forced the price down, but buyers stepped in to buy at a discount before close.
+Phase 1. In Timeframes H4, H1, And M30 Identify All The Previous Support, Resistance, Support Became Resistance (SBR), And Resistance Became Support (RBS)
+   Support and resistance are key price levels where market moves pause or reverse. Support is a floor where buying stops drops. Resistance is a ceiling where selling stops rises.
+   SBR means Support Becomes Resistance after a break. RBS means Resistance Becomes Support. Specific candlestick patterns build and confirm these pivotal zones.
+     - Support: Price drops, hits a floor, and buyers step in.
+     - Resistance: Price rises, hits a ceiling, and sellers step in.
+     - Role Reversal: Broken support turns into resistance (SBR). Broken resistance turns into support (RBS).
+   SBR and RBS Explained :
+     - SBR (Support Becomes Resistance): Price falls below an old support line. Later, when price rises back to this line, sellers push it down.
+     - RBS (Resistance Becomes Support): Price breaks above an old resistance line. Later, when price drops back to this line, buyers push it up.
+
 
 
 
