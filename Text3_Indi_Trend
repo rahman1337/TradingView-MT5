@@ -44,8 +44,8 @@ Phase 1. In Timeframes H4, H1, M30, And M15 Identify All The Previous Support, R
      - Morning Star / Evening Star: Three-candle patterns. They signal strong reversals at major tops or bottoms.
 
 Phase 2. After All H4, H1, M30, And M15 Support, Resistance, SBR, And RBS Lines Identified. In M15 And M5 We Wait Until Price Touches Any Lines, And Confirm Buy Or Sell Entry :
-
-  # 4 Confirmations :
+         2 Of 4 For Technical Confirmations Needed, And 2 Of 3 Indicators Confirmations Needed To Satisfy Entry Confirmation.
+  # 4 Technical Confirmations :
 
        - 1. (M15 And M5) Candle Rejection. This is a visual story of a failed mission. One side tried to push the price somewhere, but the other side violently pushed them back before the candle timer ran out.
             (1 Of 4 Needed To Satisfy Candle Rejection Confirmation)
@@ -100,7 +100,9 @@ Phase 2. After All H4, H1, M30, And M15 Support, Resistance, SBR, And RBS Lines 
                    - Spot the final, lowest candle at the very bottom of the FVG/OB zone.
                    - Spot just slightly to the recent candles and find the last minor "staircase peak" (the last minor high) that caused that final drop.
                    - When a new green candle aggressively charges upward and closes its solid body above that last minor peak, the character of the market has changed from bearish to  
-  # 3 Indicators :
+       - 4. (M5) Equal High(EQH) And Equal Low(EQL).
+
+# 3 Indicators Confirmations :
 
        - 1. (M15) Relative Strength Index (RSI).  Think of the RSI as a speedometer that measures how fast car prices are moving, and whether buyers or sellers are getting tired. It ranges from a score of 0 to 100, 
             It tells if the market is over-pumped (Overbought) or completely exhausted (Oversold).
