@@ -48,6 +48,7 @@ Phase 2. After All H4, H1, M30, And M15 Support, Resistance, SBR, And RBS Lines 
   # 4 Confirmations :
 
        - 1. (M15 And M5) Candle Rejection. This is a visual story of a failed mission. One side tried to push the price somewhere, but the other side violently pushed them back before the candle timer ran out.
+            (1 Of 4 Needed To Satisfy Candle Rejection Confirmation)
                 Sell Conditions : 
                      -- 1. EVENING STAR :
                           Candle 1: A large, solid bullish candle continuing an upward pushing upward.
@@ -98,11 +99,7 @@ Phase 2. After All H4, H1, M30, And M15 Support, Resistance, SBR, And RBS Lines 
                    - As Price falls into FVG/OB zone, it was making a staircase downward (lower highs and lower lows).
                    - Spot the final, lowest candle at the very bottom of the FVG/OB zone.
                    - Spot just slightly to the recent candles and find the last minor "staircase peak" (the last minor high) that caused that final drop.
-                   - When a new green candle aggressively charges upward and closes its solid body above that last minor peak, the character of the market has changed from bearish to bullish.
-       - 4. (M5) Equal Highs (EQH) & Equal Lows (EQL). These look like price has hit a flat, solid wall. In the  Of FVG/OB Zone.
-              Sell Condition (EQH) : two or more candles whose top wicks peak out at the exact same price level, forming a straight horizontal ceiling. It looks like a double or triple top.
-              Buy Condition (EQL) : two or more candles whose bottom wicks drop down and step on the exact same price line, forming a flat floor.
- 
+                   - When a new green candle aggressively charges upward and closes its solid body above that last minor peak, the character of the market has changed from bearish to  
   # 3 Indicators :
 
        - 1. (M15) Relative Strength Index (RSI).  Think of the RSI as a speedometer that measures how fast car prices are moving, and whether buyers or sellers are getting tired. It ranges from a score of 0 to 100, 
