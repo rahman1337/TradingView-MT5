@@ -3,7 +3,8 @@ Build It Really Carefully And Thinkfully.
 Take All The Times You Need, Build All The Longest Lined File You Need, Build All The Larget Sized File You Need.
 
 Symbol : XAUUSD
-Timeframes : H4 - H1 - M15 -M5
+Setup Confluence Timeframes : H4 - H1 - M30 - M15
+Entry Confluence Timeframes : M15 - M5
 
 Trade Management :
 Fixed LOT 0.01
@@ -27,7 +28,7 @@ Dashboard Visual :
 
 Whole EA Strategy :
 
-Phase 1. In Timeframes H4, H1, And M30 Identify All The Previous Support, Resistance, Support Became Resistance (SBR), And Resistance Became Support (RBS) And Mark As Entry Lines.
+Phase 1. In Timeframes H4, H1, M30, And M15 Identify All The Previous Support, Resistance, Support Became Resistance (SBR), And Resistance Became Support (RBS) And Mark As Entry Lines.
    Support and resistance are key price levels where market moves pause or reverse. Support is a floor where buying stops drops. Resistance is a ceiling where selling stops rises.
    SBR means Support Becomes Resistance after a break. RBS means Resistance Becomes Support. Specific candlestick patterns build and confirm these pivotal zones.
      - Support: Price drops, hits a floor, and buyers step in.
@@ -42,19 +43,11 @@ Phase 1. In Timeframes H4, H1, And M30 Identify All The Previous Support, Resist
      - Doji: Open and close are equal. It shows market indecision. It often forms right at turning points before a strong move.
      - Morning Star / Evening Star: Three-candle patterns. They signal strong reversals at major tops or bottoms.
 
-Phase 2. After All H4, H1, And M30 Support, Resistance, SBR, And RBS Lines Identified. In M15 And M5 We Wait Until Price Touches Any Of Lines, And Confirm Buy Or Sell Entry :
-
-
-
-
-
-
-
-Phase 6. Once Price Touches Our Bullish/Bearish FVG/OB Entry Zone. We Immediately Confirms Entry With At Least 2 Of 4 Confirmations Satisfied, And 1 Of 3 Indicator Satisfied, Just Then We Place Entry In Our Entry Zone.
+Phase 2. After All H4, H1, M30, And M15 Support, Resistance, SBR, And RBS Lines Identified. In M15 And M5 We Wait Until Price Touches Any Lines, And Confirm Buy Or Sell Entry :
 
   # 4 Confirmations :
 
-       - 1. (M15 And M5) Candle Rejection (Only 1 Of 4 Needed To Satisfy The Candle Rejection Confirmation). This is a visual story of a failed mission. One side tried to push the price somewhere, but the other side violently pushed them back before the candle timer ran out.
+       - 1. (M15 And M5) Candle Rejection. This is a visual story of a failed mission. One side tried to push the price somewhere, but the other side violently pushed them back before the candle timer ran out.
                 Sell Conditions : 
                      -- 1. EVENING STAR :
                           Candle 1: A large, solid bullish candle continuing an upward pushing upward.
