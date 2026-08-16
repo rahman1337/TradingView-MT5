@@ -42,35 +42,13 @@ Phase 1. In Timeframes H4, H1, And M30 Identify All The Previous Support, Resist
      - Doji: Open and close are equal. It shows market indecision. It often forms right at turning points before a strong move.
      - Morning Star / Evening Star: Three-candle patterns. They signal strong reversals at major tops or bottoms.
 
-Phase 2. After All H4, H1, And M30 Support, Resistance, SBR, And RBS Lines Identified. In M15 And M5 We Wait Until Price Touches Any Of Lines, And Confirm Buy Or Sell Entry With :
-   BOS signals the continuation of an ongoing trend, while CHoCH signals an early warning of a potential trend reversal. Both are defined by candle body closes past key structural swing points rather than temporary wicks.
-       - BOS (Break of Structure): This is the continuation of an established trend. Once CHoCH happens, the next time price breaks a swing high/low in that same direction, it is a BOS.
-              Bullish BOS: In an uptrend (higher highs and higher lows), price pushes through and closes above a previous swing high, confirming that buyers are still strong and the trend continues upward.
-              Bearish BOS: In a downtrend (lower highs and lower lows), price pushes through and closes below a previous swing low, confirming that sellers maintain control and the downward trend persists.
-              Rule of Thumb: Wicks do not count; you must see a clean candle body close past the level on your chosen timeframe.
-       - CHoCH (Change of Character): This is the first sign of a trend reversal. It occurs when price sweeps liquidity and then aggressively breaks the most recent short-term swing point in the opposite direction.
-              Bullish CHoCH: During a persistent downtrend, the price unexpectedly breaks and closes above the last minor or external lower high. This shows the first sign of buyer strength.
-              Bearish CHoCH: During an established uptrend, the price breaks and closes below the last higher low. This indicates that sellers have overwhelmed the buyers' last line of defense.
-              Significance: It does not guarantee a full reversal on its own, but it serves as an alert to change trading bias and look for pullback entries in the new direction
-    Direction: BOS moves with the existing trend; CHoCH moves against it.
-    Meaning: BOS means continuation; CHoCH means a potential reversal.
-    Action: After a BOS, We trade with the trend. After a CHoCH, We wait for a retest or confirmation structure to trade the new direction
+Phase 2. After All H4, H1, And M30 Support, Resistance, SBR, And RBS Lines Identified. In M15 And M5 We Wait Until Price Touches Any Of Lines, And Confirm Buy Or Sell Entry :
 
-Phase 3. In Both M15 And M5 Timeframes, Identify the Valid Order Block (OB), An Order Block is the candle where institutions placed massive sell or buy orders to engineer the liquidity sweep.
-      - Bullish OB: The lowest down-close (bearish) candle that swept the liquidity right before the aggressive upward move.
-      - Bearish OB: The highest up-close (bullish) candle that swept the liquidity right before the aggressive downward move.
-      Validation Rule 1 (Displacement): The market must leave the OB with massive momentum (large, body-heavy candles). If price slowly drifts away, the OB is invalid.
-      Validation Rule 2 (Invalidation Level): A bullish OB is completely invalidated if price closes below its lowest wick. A bearish OB is invalidated if price closes above its highest wick.
 
-Phase 4. In Both M15 And M5 Timeframes, Identify the Valid Fair Value Gap (FVG), An FVG is a 3-candle structural imbalance where price moved so fast that only buy orders or sell orders were filled, leaving an inefficient "hole" in the market.
-      - Bullish FVG Setup:Look at a sequence of 3 consecutive bullish candles.
-           The Gap: The space between the High of Candle 1 and the Low of Candle 3.
-           If Candle 1's wick and Candle 3's wick do not touch, the empty space between them is the FVG.
-      - Bearish FVG Setup:Look at a sequence of 3 consecutive bearish candles.
-           The Gap: The space between the Low of Candle 1 and the High of Candle 3.
-     Validation Rule: High-quality FVGs sit inside or just above/below your Order Block. When price returns to mitigate (test) the OB, it will usually fill the FVG first like a magnet.
 
-Phase 5. After Valid Bullish And Bearish FVG - And Bullish And Bearish OB Identified. Then Mark Those As Our Entry Zones. And Draws Those On Opened Chart.
+
+
+
 
 Phase 6. Once Price Touches Our Bullish/Bearish FVG/OB Entry Zone. We Immediately Confirms Entry With At Least 2 Of 4 Confirmations Satisfied, And 1 Of 3 Indicator Satisfied, Just Then We Place Entry In Our Entry Zone.
 
