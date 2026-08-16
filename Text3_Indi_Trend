@@ -1,6 +1,7 @@
 Help Me Build A Full MQL5 EA AutoTrade With All Exact Following Rules Below.
 Build It Really Carefully And Thinkfully.
-Take All The Times You Need, Build All The Longest Lined File You Need, Build All The Larget Sized File You Need.
+Take All The Times You Need, Build All The Longest Lined File You Need Even It Contains Thousands Of Thousands.
+Build All The Larget Sized File You Need Even It Need Hundreds Of KB Even MB. Do Your Best With The Exact Rules Below.
 
 Symbol : XAUUSD
 Setup Confluence Timeframes : H4 - H1 - M30 - M15
@@ -91,32 +92,32 @@ Phase 2. After All H4, H1, M30, And M15 Support, Resistance, SBR, And RBS Lines 
                 BOS Rule : If a candle only pokes its thin wick through the line but the solid body shrinks back and closes inside, it is a fake-out, not a BOS.
        - 3. (M5) Change of Character (CHoCH). CHoCH happens when a trend flips direction for the first time. It is the very first sign of a trend reversal.
                Sell Condition : Bearish CHoCH :
-                   - As Price climbs into Our FVG/OB zone, it was making a staircase upward (higher highs and higher lows).
-                   - Spot the final, highest candle at the very top of the FVG/OB zone.
+                   - As Price climbs into Our Entry Line, it was making a staircase upward (higher highs and higher lows).
+                   - Spot the final, highest candle at the very top of the Entry Line.
                    - Spot just slightly to the recent candles and find the last minor "staircase peak" (the last minor low) that caused that final up.
                    - When a new red candle aggressively charges downward and closes its solid body below that last minor peak, the character of the market has changed from bullish to bearish.
                Buy Condition : Bullish CHoCH :
-                   - As Price falls into FVG/OB zone, it was making a staircase downward (lower highs and lower lows).
-                   - Spot the final, lowest candle at the very bottom of the FVG/OB zone.
+                   - As Price falls into Entry Line., it was making a staircase downward (lower highs and lower lows).
+                   - Spot the final, lowest candle at the very bottom of the Entry Line.
                    - Spot just slightly to the recent candles and find the last minor "staircase peak" (the last minor high) that caused that final drop.
-                   - When a new green candle aggressively charges upward and closes its solid body above that last minor peak, the character of the market has changed from bearish to  
+                   - When a new green candle aggressively charges upward and closes its solid body above that last minor peak, the character of the market has changed from bearish to bullish.
        - 4. (M5) Equal High(EQH) And Equal Low(EQL).
 
 # 3 Indicators Confirmations :
 
        - 1. (M15) Relative Strength Index (RSI).  Think of the RSI as a speedometer that measures how fast car prices are moving, and whether buyers or sellers are getting tired. It ranges from a score of 0 to 100, 
             It tells if the market is over-pumped (Overbought) or completely exhausted (Oversold).
-              Sell Condition : When Price rises into FVG/OB Zone, look for the RSI to climb above 70 and then cross back below 70 or 50, proving sellers are taking control.
-              Buy Condition : When Price drops into  Of FVG/OB Zone, the RSI on the M15 chart will often drop below 30 (meaning sellers are exhausted). should look for the moment the RSI line crosses back above 30 or 50. This proves that buyers are stepping back in.
+              Sell Condition : When Price rises into Entry Line, look for the RSI to climb above 70 and then cross back below 70 or 50, proving sellers are taking control.
+              Buy Condition : When Price drops into Entry Line, the RSI on the M15 chart will often drop below 30 (meaning sellers are exhausted). should look for the moment the RSI line crosses back above 30 or 50. This proves that buyers are stepping back in.
        - 2. (M15) Moving Average Convergence Divergence (MACD). Think of the MACD as a momentum camera. It doesn't look at individual price ticks; it looks at the overall shifting weight of the market,
             It consists of two lines and a bar chart (the histogram) that moves above and below a central "0" line.  It filters out "fake" price movements and tells you when the actual shift in power happens.
               Sell Condition : The easiest rule is the central 0 line. In A Sell Condition trade, wait for the MACD bars to switch from being above 0 (green/positive) to printing below 0 (red/negative).
               Buy Condition : The easiest rule is the central 0 line. In A Buy Condition trade, wait for the MACD bars to switch from being below 0 (red/negative) to printing above 0 (green/positive).
        - 3. (H1 And M15) Exponential Moving Average (EMA50). Think of the EMA 50 as a moving floor or ceiling. It takes the average price of the last 50 candles but puts more weight on the most recent candles so it reacts quickly to sudden news or movements.
             It acts as a visual trend barrier. If the price is above it, the immediate trend is up. If the price is below it, the immediate trend is down.
-              The Bounce Filter :  Of FVG/OB Zone is a theoretical area where price might stop. The EMA 50 gives it a physical barrier.
-              Sell Condition :  Wait for the price to hit Of FVG/OB Zone, struggle to go higher, and then close a candle completely below the M15 EMA 50 line. This acts as proof that the "ceiling" held.
-              Buy Condition :  Wait for the price to hit  Of FVG/OB Zone, struggle to go lower, and then close a candle completely above the M15 EMA 50 line. This acts as proof that the "floor" held.
+              The Bounce Filter : Identified Entry Lines are theoretical area where price might stop. The EMA 50 gives it a physical barrier.
+              Sell Condition :  Wait for the price to hit Entry Line, struggle to go higher, and then close a candle completely below the M15 EMA 50 line. This acts as proof that the "ceiling" held.
+              Buy Condition :  Wait for the price to hit Entry Line, struggle to go lower, and then close a candle completely above the M15 EMA 50 line. This acts as proof that the "floor" held.
 
 
 
