@@ -27,7 +27,7 @@ Dashboard Visual :
 
 Whole EA Strategy :
 
-Phase 1. In Timeframes H4, H1, And M30 Identify All The Previous Support, Resistance, Support Became Resistance (SBR), And Resistance Became Support (RBS)
+Phase 1. In Timeframes H4, H1, And M30 Identify All The Previous Support, Resistance, Support Became Resistance (SBR), And Resistance Became Support (RBS) And Mark As Entry Lines.
    Support and resistance are key price levels where market moves pause or reverse. Support is a floor where buying stops drops. Resistance is a ceiling where selling stops rises.
    SBR means Support Becomes Resistance after a break. RBS means Resistance Becomes Support. Specific candlestick patterns build and confirm these pivotal zones.
      - Support: Price drops, hits a floor, and buyers step in.
@@ -42,7 +42,7 @@ Phase 1. In Timeframes H4, H1, And M30 Identify All The Previous Support, Resist
      - Doji: Open and close are equal. It shows market indecision. It often forms right at turning points before a strong move.
      - Morning Star / Evening Star: Three-candle patterns. They signal strong reversals at major tops or bottoms.
 
-Phase 2. After All H4, H1, And M30 Support, Resistance, SBR, And RBS Identified. In M15 And M5 We Wait Until Price Touches H4, 
+Phase 2. After All H4, H1, And M30 Support, Resistance, SBR, And RBS Lines Identified. In M15 And M5 We Wait Until Price Touches Any Of Lines, And Confirm Buy Or Sell Entry With :
    BOS signals the continuation of an ongoing trend, while CHoCH signals an early warning of a potential trend reversal. Both are defined by candle body closes past key structural swing points rather than temporary wicks.
        - BOS (Break of Structure): This is the continuation of an established trend. Once CHoCH happens, the next time price breaks a swing high/low in that same direction, it is a BOS.
               Bullish BOS: In an uptrend (higher highs and higher lows), price pushes through and closes above a previous swing high, confirming that buyers are still strong and the trend continues upward.
