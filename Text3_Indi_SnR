@@ -72,7 +72,7 @@ Phase 2. After All H4, H1, M30, And M15 Support, Resistance, SBR, And RBS Lines 
                           Candle 3: A large, solid bearish candle closing deep (at least 50%) into the body of Candle 1.
                           Execution: Enter at the close of Candle 3.
                      -- 2. BEARISH ENGULFING :
-                          Candle 1: A small bullish candle resting around ceiling Of FVG/OB Zone.
+                          Candle 1: A small bullish candle resting around ceiling Of Entry Line Areas.
                           Candle 2: A large bearish candle where the body completely wraps around and closes below the open of Candle 1.
                           Execution: Enter at the close of Candle 2.
                      -- 3. SELL OVERLAP TRIGGER :
@@ -80,7 +80,7 @@ Phase 2. After All H4, H1, M30, And M15 Support, Resistance, SBR, And RBS Lines 
                           Candle 2: The next candle shifts bearish and drops low enough to close below the open price (the bottom of the body) of Candle 1.
                           Execution: Enter the moment Candle 2 closes below that structural line.
                      -- 4. SELL LIQUIDITY SWEEP :
-                          Candle 1: Price pushes cleanly upward to FVG/OB zone.
+                          Candle 1: Price pushes cleanly upward to Entry Lines.
                           Candle 2: Price aggressively rejects downward. It leaves a long top wick poking through the line, closing with a heavy, strong bearish body back below the key level.
                           Execution: Enter immediately at the close of Candle 2.
                 Buy Condition :
@@ -90,15 +90,15 @@ Phase 2. After All H4, H1, M30, And M15 Support, Resistance, SBR, And RBS Lines 
                           Candle 3: A large, solid bullish candle that opens higher and closes at least 50% or deeper into the body of Candle 1.
                           Execution: Enter at the close of Candle 3.
                      -- 2. BULLISH ENGULFING :
-                          Candle 1: A small bearish candle resting around floor Of FVG/OB Zone.
+                          Candle 1: A small bearish candle resting around floor Of Entry Line Areas.
                           Candle 2: A large bullish candle where the body completely wraps around and closes above the open of Candle 1.
                           Execution: Enter at the close of Candle 2.
                      -- 3. BUY OVERLAP TRIGGER :
-                          Candle 1: The final bearish candle that prints as price reaching floor Of FVG/OB Zone.
+                          Candle 1: The final bearish candle that prints as price reaching floor Of Entry Lines.
                           Candle 2: The next candle shifts bullish and manages to stretch upward to close above the open price (the top of the body) of Candle 1.
                           Execution: Enter the moment Candle 2 closes above that specific structural line.
                      -- 4. BUY LIQUIDITY SWEEP :
-                          Candle 1: Price drops sharply downward to FVG/OB zone.
+                          Candle 1: Price drops sharply downward to Entry Lines.
                           Candle 2: Price aggressively snaps back up. It leaves behind a long bottom wick below the line, closing with a heavy, strong bullish body back above the key level.
                           Execution: Enter immediately at the close of Candle 2.
 
