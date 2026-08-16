@@ -1,0 +1,164 @@
+Help Me Build A Full MQL5 EA AutoTrade With All Exact Following Rules Below.
+Build It Really Carefully And Thinkfully.
+Take All The Times You Need, Build All The Longest Lined File You Need, Build All The Larget Sized File You Need.
+
+Symbol : XAUUSD
+Timeframes : H4 - H1 - M15 -M5
+
+Trade Management :
+Fixed LOT 0.01
+StopLoss +/-50Pips Behind FVG
+Risk:Reward 1:3, TP1=R1, TP2=R2, TP3=R3 .
+Break-Even +10Pips, Once Price Reached 0.5R
+Trailing StopLoss To TP1/TP2/TP3
+
+Dashboard Visual :
+- Balance - Equity
+- Winrate - Floating PnL
+# Main Background Color = Dark Beige
+# Assigned Background Color For Each Texts = Lighter Beige
+# Use "DrawLabel" For Each Dashboard Texts 
+Whole EA Strategy :
+
+Phase 1. In Timeframes H4 And H1 Identify Trend By Collecting HH, HL/LH, LL
+   Higher highs and higher lows form an uptrend where buyers control the market.
+   Lower highs and lower lows form a downtrend where sellers take over.
+   These turning points (swings) are mapped out by groups of price candles showing shifts in market momentum.
+      - Higher High (HH): A peak price point that breaks above the previous peak.
+      - Higher Low (HL): A pullback low that stays higher than the previous trough.
+      - Lower High (LH): A recovery peak that fails to reach the previous high.
+      - Lower Low (LL): A drop that falls underneath the previous valley low.
+      - Uptrend: A sequence of HH and HL meaning buyers push prices higher step by step.
+      - Downtrend: A sequence of LH and LL meaning sellers force prices lower step by step.
+   The Candles That Build Highs and Lows :
+   Swings are usually defined by a simple three-candle pattern centered around wicks:
+     • Swing High Candle Formation:
+        - First Candle: Rises, creating a local high.
+        - Middle Candle: Shoots higher, printing the highest peak of the three via its top wick.
+        - Third Candle: Closes lower than the middle candle's peak, confirming the rejection.
+        - Wick meaning: The top wick shows buyers pushed the price up, but sellers pushed it back down before the candle closed.
+     • Swing Low Candle Formation:
+        - First Candle: Drops down.
+        - Middle Candle: Dips further, printing the lowest valley point via its bottom wick.
+        - Third Candle: Rises back up, closing higher than the middle candle's bottom.
+        - Wick meaning: The bottom wick shows sellers forced the price down, but buyers stepped in to buy at a discount before close.
+
+
+
+
+
+
+
+
+Phase 2. After Trend Identified, In Both M15 And M5 Timeframes, Identify BOS And CHoCH.
+   BOS signals the continuation of an ongoing trend, while CHoCH signals an early warning of a potential trend reversal. Both are defined by candle body closes past key structural swing points rather than temporary wicks.
+       - BOS (Break of Structure): This is the continuation of an established trend. Once CHoCH happens, the next time price breaks a swing high/low in that same direction, it is a BOS.
+              Bullish BOS: In an uptrend (higher highs and higher lows), price pushes through and closes above a previous swing high, confirming that buyers are still strong and the trend continues upward.
+              Bearish BOS: In a downtrend (lower highs and lower lows), price pushes through and closes below a previous swing low, confirming that sellers maintain control and the downward trend persists.
+              Rule of Thumb: Wicks do not count; you must see a clean candle body close past the level on your chosen timeframe.
+       - CHoCH (Change of Character): This is the first sign of a trend reversal. It occurs when price sweeps liquidity and then aggressively breaks the most recent short-term swing point in the opposite direction.
+              Bullish CHoCH: During a persistent downtrend, the price unexpectedly breaks and closes above the last minor or external lower high. This shows the first sign of buyer strength.
+              Bearish CHoCH: During an established uptrend, the price breaks and closes below the last higher low. This indicates that sellers have overwhelmed the buyers' last line of defense.
+              Significance: It does not guarantee a full reversal on its own, but it serves as an alert to change trading bias and look for pullback entries in the new direction
+    Direction: BOS moves with the existing trend; CHoCH moves against it.
+    Meaning: BOS means continuation; CHoCH means a potential reversal.
+    Action: After a BOS, We trade with the trend. After a CHoCH, We wait for a retest or confirmation structure to trade the new direction
+
+Phase 3. In Both M15 And M5 Timeframes, Identify the Valid Order Block (OB), An Order Block is the candle where institutions placed massive sell or buy orders to engineer the liquidity sweep.
+      - Bullish OB: The lowest down-close (bearish) candle that swept the liquidity right before the aggressive upward move.
+      - Bearish OB: The highest up-close (bullish) candle that swept the liquidity right before the aggressive downward move.
+      Validation Rule 1 (Displacement): The market must leave the OB with massive momentum (large, body-heavy candles). If price slowly drifts away, the OB is invalid.
+      Validation Rule 2 (Invalidation Level): A bullish OB is completely invalidated if price closes below its lowest wick. A bearish OB is invalidated if price closes above its highest wick.
+
+Phase 4. In Both M15 And M5 Timeframes, Identify the Valid Fair Value Gap (FVG), An FVG is a 3-candle structural imbalance where price moved so fast that only buy orders or sell orders were filled, leaving an inefficient "hole" in the market.
+      - Bullish FVG Setup:Look at a sequence of 3 consecutive bullish candles.
+           The Gap: The space between the High of Candle 1 and the Low of Candle 3.
+           If Candle 1's wick and Candle 3's wick do not touch, the empty space between them is the FVG.
+      - Bearish FVG Setup:Look at a sequence of 3 consecutive bearish candles.
+           The Gap: The space between the Low of Candle 1 and the High of Candle 3.
+     Validation Rule: High-quality FVGs sit inside or just above/below your Order Block. When price returns to mitigate (test) the OB, it will usually fill the FVG first like a magnet.
+
+Phase 5. After Valid Bullish And Bearish FVG - And Bullish And Bearish OB Identified. Then Mark Those As Our Entry Zones. And Draws Those On Opened Chart.
+
+Phase 6. Once Price Touches Our Bullish/Bearish FVG/OB Entry Zone. We Immediately Confirms Entry With At Least 2 Of 4 Confirmations Satisfied, And 1 Of 3 Indicator Satisfied, Just Then We Place Entry In Our Entry Zone.
+
+  # 4 Confirmations :
+
+       - 1. (M15 And M5) Candle Rejection (Only 1 Of 4 Needed To Satisfy The Candle Rejection Confirmation). This is a visual story of a failed mission. One side tried to push the price somewhere, but the other side violently pushed them back before the candle timer ran out.
+                Sell Conditions : 
+                     -- 1. EVENING STAR :
+                          Candle 1: A large, solid bullish candle continuing an upward pushing upward.
+                          Candle 2: A small-bodied candle (or Doji) at the top. Buyers are stalling.
+                          Candle 3: A large, solid bearish candle closing deep (at least 50%) into the body of Candle 1.
+                          Execution: Enter at the close of Candle 3.
+                     -- 2. BEARISH ENGULFING :
+                          Candle 1: A small bullish candle resting around ceiling Of FVG/OB Zone.
+                          Candle 2: A large bearish candle where the body completely wraps around and closes below the open of Candle 1.
+                          Execution: Enter at the close of Candle 2.
+                     -- 3. SELL OVERLAP TRIGGER :
+                          Candle 1: The final bullish candle that prints as price climbs upward.
+                          Candle 2: The next candle shifts bearish and drops low enough to close below the open price (the bottom of the body) of Candle 1.
+                          Execution: Enter the moment Candle 2 closes below that structural line.
+                     -- 4. SELL LIQUIDITY SWEEP :
+                          Candle 1: Price pushes cleanly upward to FVG/OB zone.
+                          Candle 2: Price aggressively rejects downward. It leaves a long top wick poking through the line, closing with a heavy, strong bearish body back below the key level.
+                          Execution: Enter immediately at the close of Candle 2.
+                Buy Condition :
+                     -- 1. MORNING STAR :
+                          Candle 1: A large, solid bearish candle continuing the current markdown trend.
+                          Candle 2: A small-bodied candle (or Doji) that gaps or pushes lower but fails to expand down. It shows sellers are losing steam.
+                          Candle 3: A large, solid bullish candle that opens higher and closes at least 50% or deeper into the body of Candle 1.
+                          Execution: Enter at the close of Candle 3.
+                     -- 2. BULLISH ENGULFING :
+                          Candle 1: A small bearish candle resting around floor Of FVG/OB Zone.
+                          Candle 2: A large bullish candle where the body completely wraps around and closes above the open of Candle 1.
+                          Execution: Enter at the close of Candle 2.
+                     -- 3. BUY OVERLAP TRIGGER :
+                          Candle 1: The final bearish candle that prints as price reaching floor Of FVG/OB Zone.
+                          Candle 2: The next candle shifts bullish and manages to stretch upward to close above the open price (the top of the body) of Candle 1.
+                          Execution: Enter the moment Candle 2 closes above that specific structural line.
+                     -- 4. BUY LIQUIDITY SWEEP :
+                          Candle 1: Price drops sharply downward to FVG/OB zone.
+                          Candle 2: Price aggressively snaps back up. It leaves behind a long bottom wick below the line, closing with a heavy, strong bullish body back above the key level.
+                          Execution: Enter immediately at the close of Candle 2.
+       - 2. (M5) Break of Structure (BOS). A Break of Structure is proof that a trend is healthy and moving forward. It requires the market to clear out old boundaries decisively.
+                Sell Condition : Bearish BOS (Downtrend), Find the lowest point of the last downward wave (the previous Swing Low). A red candle must push below that floor and close its solid body underneath it.
+                Buy Condition : Bullish BOS (Uptrend), Find the highest point of the last upward wave (the previous Swing High). A new green candle must push past that peak and close its solid body above that old high line.
+                BOS Rule : If a candle only pokes its thin wick through the line but the solid body shrinks back and closes inside, it is a fake-out, not a BOS.
+       - 3. (M5) Change of Character (CHoCH). CHoCH happens when a trend flips direction for the first time. It is the very first sign of a trend reversal.
+               Sell Condition : Bearish CHoCH :
+                   - As Price climbs into Our FVG/OB zone, it was making a staircase upward (higher highs and higher lows).
+                   - Spot the final, highest candle at the very top of the FVG/OB zone.
+                   - Spot just slightly to the recent candles and find the last minor "staircase peak" (the last minor low) that caused that final up.
+                   - When a new red candle aggressively charges downward and closes its solid body below that last minor peak, the character of the market has changed from bullish to bearish.
+               Buy Condition : Bullish CHoCH :
+                   - As Price falls into FVG/OB zone, it was making a staircase downward (lower highs and lower lows).
+                   - Spot the final, lowest candle at the very bottom of the FVG/OB zone.
+                   - Spot just slightly to the recent candles and find the last minor "staircase peak" (the last minor high) that caused that final drop.
+                   - When a new green candle aggressively charges upward and closes its solid body above that last minor peak, the character of the market has changed from bearish to bullish.
+       - 4. (M5) Equal Highs (EQH) & Equal Lows (EQL). These look like price has hit a flat, solid wall. In the  Of FVG/OB Zone.
+              Sell Condition (EQH) : two or more candles whose top wicks peak out at the exact same price level, forming a straight horizontal ceiling. It looks like a double or triple top.
+              Buy Condition (EQL) : two or more candles whose bottom wicks drop down and step on the exact same price line, forming a flat floor.
+ 
+  # 3 Indicators :
+
+       - 1. (M15) Relative Strength Index (RSI).  Think of the RSI as a speedometer that measures how fast car prices are moving, and whether buyers or sellers are getting tired. It ranges from a score of 0 to 100, 
+            It tells if the market is over-pumped (Overbought) or completely exhausted (Oversold).
+              Sell Condition : When Price rises into FVG/OB Zone, look for the RSI to climb above 70 and then cross back below 70 or 50, proving sellers are taking control.
+              Buy Condition : When Price drops into  Of FVG/OB Zone, the RSI on the M15 chart will often drop below 30 (meaning sellers are exhausted). should look for the moment the RSI line crosses back above 30 or 50. This proves that buyers are stepping back in.
+       - 2. (M15) Moving Average Convergence Divergence (MACD). Think of the MACD as a momentum camera. It doesn't look at individual price ticks; it looks at the overall shifting weight of the market,
+            It consists of two lines and a bar chart (the histogram) that moves above and below a central "0" line.  It filters out "fake" price movements and tells you when the actual shift in power happens.
+              Sell Condition : The easiest rule is the central 0 line. In A Sell Condition trade, wait for the MACD bars to switch from being above 0 (green/positive) to printing below 0 (red/negative).
+              Buy Condition : The easiest rule is the central 0 line. In A Buy Condition trade, wait for the MACD bars to switch from being below 0 (red/negative) to printing above 0 (green/positive).
+       - 3. (H1 And M15) Exponential Moving Average (EMA50). Think of the EMA 50 as a moving floor or ceiling. It takes the average price of the last 50 candles but puts more weight on the most recent candles so it reacts quickly to sudden news or movements.
+            It acts as a visual trend barrier. If the price is above it, the immediate trend is up. If the price is below it, the immediate trend is down.
+              The Bounce Filter :  Of FVG/OB Zone is a theoretical area where price might stop. The EMA 50 gives it a physical barrier.
+              Sell Condition :  Wait for the price to hit Of FVG/OB Zone, struggle to go higher, and then close a candle completely below the M15 EMA 50 line. This acts as proof that the "ceiling" held.
+              Buy Condition :  Wait for the price to hit  Of FVG/OB Zone, struggle to go lower, and then close a candle completely above the M15 EMA 50 line. This acts as proof that the "floor" held.
+
+
+
+
+
+
+
