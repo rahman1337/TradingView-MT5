@@ -3,39 +3,41 @@ Build It Really Carefully And Thinkfully.
 Take All The Times You Need, Build All The Longest Lined File You Need, Build All The Larget Sized File You Need.
 
 
-Symbol : XAUUSD
+Symbol : XAUUSD, Price : XXXX.XX
 Timeframes : H1 - M15 -M5
 
 Fibonacci Settings :
--0.27, 0.0, 0.5, 0.618, 0.786, 0.893, 1.0 .
+-0.27, 0.0, 0.5, 0.618, 0.786, 1.0 .
 
 Trade Management :
-Fixed LOT 0.01
-StopLoss On Fibonacci 0.893
+Fixed LOT 0.01, Can Be Layered Up To 3 Layers Depending On Strong Confirmations.
+StopLoss On Fibonacci 1.0
 Risk:Reward 1:3
 Break-Even
-Trailing StopLoss To TP1/TP2/TP3
+Trailing StopLoss To TP1(R:1) And TP2(R:2) .
 
 Dashboard Visual :
 - Balance - Equity
 - Winrate - Floating PnL
 - Avtive Entry Zone In Price To Price
 - Entry Confirmations Satisfied
-# Main Background Color = Dark Beige
-# Assigned Background Color For Each Texts = Lighter Beige
+# Main Background Color = Dark Blue
+# Assigned Background Color For Each Texts = Lighter Blue
 # Use "DrawLabel" For Each Dashboard Texts Lines
 
 Whole EA Strategy :
 
-1. In H1, Identify Trend In 200 Bars. Find All HH And HL / LH And LL Only To Make Sure And Be Aware Of Any Trend And Structure Shifting.
+1. In H1, Identify Trend In 3000 Bars. Find All HH And HL / LH And LL Only To Make Sure And Be Aware Of Any Trend And Structure Shifting. More Importantly, Ignore All Noisy And Tiny Breakouts. We Only Take And Mark Highest Highs And Lowest Lows After Those Noisy Tiny Breakouts.
 
-2. Then Still In H1, Identify High And Low Or Structure Shift Confirmed Trend From Previous 200 Bars HH,HL And LH,LL In 100 Bars : 
-- If In Latest 100 Bars Has HH And HL Meaning Trend Is UpTrend.
-- If In Latest 100 Bars Has LH And LL Meaning Trend Is Downtrend.
+2. Then Still In H1, Identify High And Low Or Structure Shift Confirmed Trend From Previous 3000 Bars HH,HL And LH,LL In 1000 Bars : 
+- If In Latest 1000 Bars Has HH And HL Meaning Trend Is UpTrend.
+- If In Latest 1000 Bars Has LH And LL Meaning Trend Is Downtrend.
 
-3. Find High And Low Of Confirmed 100 Bars Latest Trend And Place Fibonacci Extension :
-- If Trend Is Uptrend, Find That Latest HL Of 100 Bars And Mark It With Fibonacci Extension 1.0, And Find That Latest HH Of 100 Bars And Mark With Fibonacci Extension 0.0 .
-- If Trend Is Downtrend, Find That Latest LL Of 100 Bars And Mark It With Fibonacci Extension 0.0, And Find That Latest LH Of 100 Bars And Mark With Fibonacci Extension 1.0 .
+3. Find High And Low Of Confirmed 1000 Bars Latest Trend And Place Fibonacci Extension :
+- If Trend Is Uptrend, Find That Latest HL Of 1000 Bars And Mark It With Fibonacci Extension 1.0, And Find That Latest HH Of 1000 Bars And Mark With Fibonacci Extension 0.0.
+  If There Are No Latest HH Yet, Wait For It To Form After Noisy Tiny Breakouts Finished And Built A Ceiling As A Strong High.
+- If Trend Is Downtrend, Find That Latest LH Of 1000 Bars And Mark With Fibonacci Extension 1.0, And Find That Latest LL Of 1000 Bars And Mark It With Fibonacci Extension 0.0.
+  If There Are No Latest LL Yet, Wait For It To Form After Noisy Tiny Breakouts Finished And Built A Floor As A Strong Low.
 
 4. Once Fibonacci Is Placed On Latest High And Low H1, In H1 Mark Zone/Price Fibonacci Extension 0.618 - 0.786 As Entry Zone. Wait For The Price To Return To Marked H1 Fibonacci 0.618 - 0.786 .
 
