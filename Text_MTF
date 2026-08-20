@@ -7,9 +7,9 @@ Do Your Best With The Exact Rules Below.
 
 
 Symbol : XAUUSD.vx (2 Digits)
-Trend Timeframes : H4 - H1 - M30 - M15 -M5
-Entry Zones Timeframes :  H1 - M15 -M5
-Main Monitoring Timeframe : M5
+Trend Timeframes : M15 -M5
+Entry Zones Timeframes : M15 -M5
+Main Monitoring Timeframe : M1
 
 Dashboard Visual :
 [Title = GOLD SCALP]
@@ -31,7 +31,7 @@ Chart Visual :
 
 Whole EA Strategy :
 
-Phase 1. In Timeframes H4, H1, M30, M15 And M5 Identify Trend Bias With Gathering Indicators And Scoring :
+Phase 1. In Timeframes M15 And M5 Identify Trend Bias With Gathering Indicators And Scoring :
    - Oscillators :
        1. Relative Strength Index (14) - 3.8 Points
        2. Stochastic %K (14, 3, 3) - 3.8 Points
@@ -65,7 +65,7 @@ Phase 1. In Timeframes H4, H1, M30, M15 And M5 Identify Trend Bias With Gatherin
   If Sell Scores Are Stronger = Look For Sell Entry Zones Only .
 
 
-Phase 2. After All H4, H1, M30,M15 And M5 Trend Bias Scores Calculated, Identify Entry Zones :
+Phase 2. After All M15 And M5 Trend Bias Scores Calculated, Identify Entry Zones :
   All Entry Zones Are Built After Closed Candle And Built 1-2 Candle After That Closed Candle .
 
      Buy Condition :
@@ -105,8 +105,6 @@ Trade Management :
 Fixed LOT 0.01
 StopLoss : 200Points/20Pips Behind Each Entry Zones Individually .
 
-Entry Layering For H1 Entry Zones :
-Position 1 = BE Once Price Reaches 0.5REWARD, TP On 100PIPS/1000Points .
 
 Entry Layering For M15 Entry Zones :
 Position 1 = BE Once Price Reaches 0.8REWARD, TP On 40PIPS/400Points .
@@ -117,4 +115,6 @@ Entry Layering For M5 Entry Zones :
 Position 1 = BE Once Price Reaches 0.8REWARD, TP On 40PIPS/400Points .
 Position 2 = BE Once Price Reaches 0.5REWARD, TP On 70PIPS/700Points .
 
-
+NOTE :
+- PLACE ALL ENTRIES IN THE MIDDLE OF ENTRY ZONES
+- INDIVIDUAL SETUPS : M15 BIAS ARE FOR M15 ENTRY ZONES AND ENTRIES, M5 BIAS ARE FOR M5 ENTRY ZONES AND ENTRIES, 
