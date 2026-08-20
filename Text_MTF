@@ -1,0 +1,144 @@
+Help Me Build A Full MQL5 EA AutoTrade With All Exact Following Rules Below.
+Build It Really Carefully And Thinkfully.
+Take All The Inputs Needed From MetaEditor If Needed.
+Take All The Times You Need, Build All The Longest Lined File You Need Even It Contains Thousands Of Thousands.
+Build All The Largest Sized File You Need Even It Need Hundreds Of KB Even MB.
+Do Your Best With The Exact Rules Below.
+
+
+Symbol : XAUUSD
+Trend Timeframes : H4 - H1 - M30 - M15 -M5
+Entry Zones Timeframes :  H1 - M15 -M5
+Main Monitoring Timeframe : M5
+
+Dashboard Visual :
+[Title = M15 GOLD SCALP]
+[Balance] Beside [Equity]
+[Winrate] Beside [Floating PnL]
+[Buy Score] Beside [Sell Score]
+# Use "DrawLabel" For Each Dashboard Texts Lines, And Assigned Rectangle Boxes For Each Texts
+# Main Background Color HEX = #313c45
+# Title Box Background Color HEX = #4f6271
+# Assigned Background Color For Each Texts HEX = #778ca4
+# Title Text Color HEX = #b3bfcb
+# Dashboard Texts Color HEX = d5dbc2
+
+Chart Visual :
+- Remove Grids
+- Change Bearish Candle To Red Colored
+- Change Bullish Candle To Green Colored
+
+Whole EA Strategy :
+
+Phase 1. In Timeframes H4, H1, M30, M15 And M5 Identify Trend Bias With Gathering Indicators And Scoring :
+   - Oscillators :
+       1. Relative Strength Index (14)
+       2. Stochastic %K (14, 3, 3)
+       3. Commodity Channel Index (20)
+       4. Average Directional Index (14)
+       5. Awesome Oscillator
+       6. Momentum (10)
+       7. MACD Level (12, 26)
+       8. Stochastic RSI Fast (3, 3, 14, 14)
+       9. Williams Percent Range (14)
+       10. Bull Bear Power
+       11. Ultimate Oscillator (7, 14, 28)
+   - Moving Averages :
+       1. Exponential Moving Average (10)
+       2. Exponential Moving Average (20)
+       3. Exponential Moving Average (30)
+       4. Exponential Moving Average (50)
+       5. Exponential Moving Average (100)
+       6. Exponential Moving Average (200)
+       7. Simple Moving Average (10)
+       8. Simple Moving Average (20)
+       9. Simple Moving Average (30)
+       10. Simple Moving Average (50)
+       11. Simple Moving Average (100)
+       12. Simple Moving Average (200)
+       13. Ichimoku Base Line (9, 26, 52, 26)
+       14. Volume Weighted Moving Average (20)
+       15. Hull Moving Average (9)
+  Use Those All And Set As Scoring Components,
+  If Buy Scores Are Stronger = Look For Buy Entry Zones Only .
+  If Sell Scores Are Stronger = Look For Sell Entry Zones Only .
+
+
+Phase 2. After All H4, H1, M30,M15 And M5 Trend Bias Scores Calculated, Identify Entry Zones :
+  All Entry Zones Are Built After Closed Candle And Built 1-2 Candle After That Closed Candle .
+
+  Entry Zones For Each Timeframes :
+    H1 = RBR/DBD, OB, FVG
+    M15 = RBR/DBD, OB, FVG
+    M5 = RBR/DBD, OB. (For M5 We Only Take OB And DBD/RBR Since A Lot Of Noises In LTF.
+
+     Buy Condition :
+        1. Rally Base Rally (RBR)
+           An RBR is a bullish continuation pattern that signals strong underlying buying pressure. How it Forms:
+           First Rally: Price moves sharply upward (rally), showing buyers are in control.
+           The Base: Price pauses and moves sideways for a few candles, forming a small consolidation box (the base).
+           Second Rally: Price breaks out forcefully upwards out of the base, continuing the original upward trend.
+           Trading Application:
+           Demand Zone: The "Base" area acts as a fresh Demand Zone.
+           Strategy: Traders wait for the price to move away and later retrace back down to test the base. They place Buy Entries at the top or middle of the base, expecting buyers to step in again and push the price back up .
+        2. Bullish Order Block (Bullish OB)
+           A bullish order block is the last down-closing (bearish) candle or sequence of bearish candles right before a strong, impulsive upward movement.
+           How it Forms: Institutions place hidden accumulation or buy limit orders inside a down candle while trapping retail sellers. They then aggressively push the price upward.
+           Key Characteristics:Followed by a sharp upward price displacement that breaks a structural high (Break of Structure or Market Structure Shift).
+           Frequently sweeps liquidity from a previous low just before the upward expansion.Leaves behind an imbalance or Fair Value Gap (FVG) on the chart.
+           Trading Application: Traders mark the high and low of this bearish candle as a zone. When the price pulls back down to this zone later, it is anticipated to act as a support floor where buyers step back in.
+        3. Bullish Fair Value Gap (Bullish FVG)
+           What is a Bullish Fair Value Gap?
+           Definition: A bullish FVG forms during a strong upward price surge.
+           Three-Candle Structure: Look at three candles in a row. The high price of the first candle does not touch or overlap the low price of the third candle.
+           The Gap Zone: The empty vertical space between the first candle's high and the third candle's low is the bullish FVG zone.
+           Market Meaning: Buyers were intensely aggressive, creating a buy-side imbalance. Price often drops back down later to "fill" or test this zone before continuing higher, acting like a support level.
+           Key Rules :
+           No Overlap: The key rule is the lack of price overlap between candle one and candle three.
+           Candle Color: The color of the first and third candles does not matter as much as the strict price levels of their wicks.
+           Rebalancing: Traders view these gaps as magnets where price tends to return to rebalance old orders.
+
+    Sell Condition :
+        1. DBD (Drop-Base-Drop)
+           A DBD is a bearish continuation pattern that signals strong underlying selling pressure and institutional distribution. How it Forms:
+           First Drop: Price moves sharply downward (drop), showing sellers are aggressively pushing prices down.
+           The Base: Price pauses and trades sideways in a tight range, creating consolidation candles.
+           Second Drop: Price breaks out downwards out of the base, resuming the strong downward trend.
+           Trading Application:
+           Supply Zone: The "Base" area acts as a fresh Supply Zone.
+           Strategy: Traders mark this base zone and wait for a future pullback (retest) up to the base. They place Sell Entries at the lower boundary of the base, anticipating that fresh selling will drive the price down again. 
+        2. Bearish Order Block (Bearish OB)
+           Bearish Order BlockA bearish order block is the last up-closing (bullish) candle or sequence of bullish candles right before a strong, impulsive downward market decline.
+           How it Forms: Institutions distribute or build short positions during an upward-closing candle, creating a trap for breakout buyers before crashing the price downward.
+           Key Characteristics:Followed by an aggressive downward price movement that breaks structural lows.Often sweeps liquidity from a previous high right before the drop.Leaves a visible downward Fair Value Gap or market inefficiency.
+           Trading Application: Traders highlight the high and low bounds of this bullish candle. When the price rallies back up to test this zone, it is anticipated to act as a resistance ceiling where heavy selling resumes.
+        3. Bearish Fair Value Gap (Bearish FVG)
+           What is a Bearish Fair Value Gap?
+           Definition: A bearish FVG forms during a sharp downward price drop.
+           Three-Candle Structure: Look at three candles in a row. The low price of the first candle does not touch or overlap the high price of the third candle.
+           The Gap Zone: The empty vertical space between the first candle's low and the third candle's high is the bearish FVG zone.
+           Market Meaning: Sellers were intensely aggressive, creating a sell-side imbalance. Price often rallies back up later to test this zone before falling lower, acting like a resistance level.
+           Key Rules :
+           No Overlap: The key rule is the lack of price overlap between candle one and candle three.
+           Candle Color: The color of the first and third candles does not matter as much as the strict price levels of their wicks.
+           Rebalancing: Traders view these gaps as magnets where price tends to return to rebalance old orders.
+
+Phase 3. Bias Scores Calculated, Entry Zones Identified, Then Place Entry With Management :
+
+Trade Management :
+Fixed LOT 0.01
+StopLoss : Behind Each Entry Zones Individually .
+
+Entry Layering For H1 Entry Zones :
+Position 1 = BE Once Price Reaches 0.5REWARD, TP On 100PIPS .
+
+Entry Layering For M15 Entry Zones :
+Position 1 = BE Once Price Reaches 0.8REWARD, TP On 40PIPS .
+Position 2 = BE Once Price Reaches 0.5REWARD, TP On 80PIPS .
+Position 3 = BE Once Price Reaches 0.5REWARD, TP On 100PIPS .
+
+Entry Layering For M5 Entry Zones :
+Position 1 = BE Once Price Reaches 0.8REWARD, TP On 40PIPS .
+Position 2 = BE Once Price Reaches 0.5REWARD, TP On 60PIPS .
+
+
