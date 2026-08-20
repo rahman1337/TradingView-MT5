@@ -1,0 +1,1275 @@
+//@version=6
+indicator("Market Structure Zones + Bias Dashboard + S/R", "MSZ BD SR", overlay=true, max_boxes_count=500, max_lines_count=200)
+
+//====================================================================
+// INPUTS
+//====================================================================
+
+//-----------------------------
+// General
+//-----------------------------
+groupGeneral = "General"
+
+showTrendlines = input.bool(true, "Show Trendlines", group=groupGeneral)
+showFVG = input.bool(true, "Show FVG", group=groupGeneral)
+showOB = input.bool(true, "Show Order Blocks", group=groupGeneral)
+showRBRDBD = input.bool(true, "Show RBR / DBD", group=groupGeneral)
+showSR = input.bool(true, "Show Support / Resistance", group=groupGeneral)
+
+extendZones = input.bool(true, "Extend Zones Right", group=groupGeneral)
+invalidateZones = input.bool(true, "Remove Mitigated / Invalidated Zones", group=groupGeneral)
+
+maxFVG = input.int(40, "Maximum FVGs", minval=1, maxval=200, group=groupGeneral)
+maxOB = input.int(30, "Maximum Order Blocks", minval=1, maxval=200, group=groupGeneral)
+maxRBRDBD = input.int(30, "Maximum RBR / DBD", minval=1, maxval=200, group=groupGeneral)
+
+//-----------------------------
+// Trendlines
+//-----------------------------
+groupTrend = "Trendlines"
+
+pivotLen = input.int(5, "Pivot Strength", minval=1, maxval=20, group=groupTrend)
+trendWidth = input.int(2, "Trendline Width", minval=1, maxval=5, group=groupTrend)
+
+bullTrendColor = input.color(color.lime, "Bullish Trendline", group=groupTrend)
+bearTrendColor = input.color(color.red, "Bearish Trendline", group=groupTrend)
+
+//-----------------------------
+// FVG
+//-----------------------------
+groupFVG = "Fair Value Gaps"
+
+fvgMinATR = input.float(0.05, "Minimum FVG Size ATR", minval=0.0, step=0.01, group=groupFVG)
+fvgExtendBars = input.int(100, "FVG Extension Bars", minval=1, maxval=500, group=groupFVG)
+
+bullFVGColor = input.color(color.new(color.green, 82), "Bullish FVG", group=groupFVG)
+bearFVGColor = input.color(color.new(color.red, 82), "Bearish FVG", group=groupFVG)
+
+bullFVGBorder = input.color(color.green, "Bullish FVG Border", group=groupFVG)
+bearFVGBorder = input.color(color.red, "Bearish FVG Border", group=groupFVG)
+
+//-----------------------------
+// Order Blocks
+//-----------------------------
+groupOB = "Order Blocks"
+
+obATR = input.float(0.50, "Displacement Minimum ATR", minval=0.0, step=0.05, group=groupOB)
+obMaxAge = input.int(200, "Maximum OB Age", minval=10, maxval=2000, group=groupOB)
+
+bullOBColor = input.color(color.new(color.teal, 80), "Bullish OB", group=groupOB)
+bearOBColor = input.color(color.new(color.orange, 80), "Bearish OB", group=groupOB)
+
+bullOBBorder = input.color(color.teal, "Bullish OB Border", group=groupOB)
+bearOBBorder = input.color(color.orange, "Bearish OB Border", group=groupOB)
+
+//-----------------------------
+// RBR / DBD
+//-----------------------------
+groupPattern = "RBR / DBD"
+
+baseLength = input.int(2, "Base Candle Count", minval=1, maxval=4, group=groupPattern)
+impulseATR = input.float(0.80, "Impulse Minimum ATR", minval=0.1, step=0.05, group=groupPattern)
+baseMaxATR = input.float(0.45, "Maximum Base Candle ATR", minval=0.05, step=0.05, group=groupPattern)
+
+rbrColor = input.color(color.new(color.blue, 82), "RBR Zone", group=groupPattern)
+dbdColor = input.color(color.new(color.purple, 82), "DBD Zone", group=groupPattern)
+
+rbrBorder = input.color(color.blue, "RBR Border", group=groupPattern)
+dbdBorder = input.color(color.purple, "DBD Border", group=groupPattern)
+
+//-----------------------------
+// Support / Resistance
+//-----------------------------
+groupSR = "Support / Resistance"
+
+srPivotLen = input.int(5, "S/R Pivot Strength", minval=1, maxval=30, group=groupSR)
+
+srATRWidth = input.float(0.20, "Zone Width ATR", minval=0.01, step=0.01, group=groupSR)
+
+srMergeATR = input.float(0.50, "Merge Distance ATR", minval=0.05, step=0.05, group=groupSR)
+
+maxSupport = input.int(12, "Maximum Support Zones", minval=1, maxval=50, group=groupSR)
+maxResistance = input.int(12, "Maximum Resistance Zones", minval=1, maxval=50, group=groupSR)
+
+srExtension = input.int(300, "S/R Extension Bars", minval=10, maxval=2000, group=groupSR)
+
+removeBrokenSR = input.bool(true, "Remove Broken S/R", group=groupSR)
+
+showSRLabels = input.bool(true, "Show S/R Labels", group=groupSR)
+
+supportColor = input.color(color.new(color.green, 86), "Support Fill", group=groupSR)
+supportBorder = input.color(color.green, "Support Border", group=groupSR)
+
+resistanceColor = input.color(color.new(color.red, 86), "Resistance Fill", group=groupSR)
+resistanceBorder = input.color(color.red, "Resistance Border", group=groupSR)
+
+//-----------------------------
+// Bias Dashboard
+//-----------------------------
+groupDashboard = "Bias Dashboard"
+
+showDashboard = input.bool(true, "Show Bias Dashboard", group=groupDashboard)
+
+dashboardPosition = input.string(
+     "Top Right",
+     "Dashboard Position",
+     options=[
+         "Top Left",
+         "Top Center",
+         "Top Right",
+         "Bottom Left",
+         "Bottom Center",
+         "Bottom Right"
+     ],
+     group=groupDashboard
+ )
+
+fastEMA = input.int(50, "Fast EMA", minval=1, group=groupDashboard)
+slowEMA = input.int(200, "Slow EMA", minval=2, group=groupDashboard)
+
+slopeBars = input.int(3, "EMA Slope Bars", minval=1, maxval=20, group=groupDashboard)
+
+neutralThreshold = input.int(1, "Neutral Threshold", minval=0, maxval=3, group=groupDashboard)
+
+showStrength = input.bool(true, "Show Strength", group=groupDashboard)
+
+//====================================================================
+// ATR
+//====================================================================
+
+atr = ta.atr(14)
+
+//====================================================================
+// ARRAYS
+//====================================================================
+
+var array<box> bullFVGs = array.new_box()
+var array<box> bearFVGs = array.new_box()
+
+var array<box> bullOBs = array.new_box()
+var array<box> bearOBs = array.new_box()
+
+var array<box> rbrZones = array.new_box()
+var array<box> dbdZones = array.new_box()
+
+var array<box> supportZones = array.new_box()
+var array<box> resistanceZones = array.new_box()
+
+var array<float> supportPrices = array.new_float()
+var array<float> resistancePrices = array.new_float()
+
+//====================================================================
+// HELPER FUNCTIONS
+//====================================================================
+
+f_add_box(array<box> arr, box newBox, int maxCount) =>
+    array.push(arr, newBox)
+
+    while array.size(arr) > maxCount
+        oldBox = array.shift(arr)
+        box.delete(oldBox)
+
+
+f_biasText(int value) =>
+    value == 1 ? "BULLISH" :
+     value == -1 ? "BEARISH" :
+     "NEUTRAL"
+
+
+f_biasArrow(int value) =>
+    value == 1 ? "▲" :
+     value == -1 ? "▼" :
+     "—"
+
+
+f_biasColor(int value) =>
+    value == 1 ? color.lime :
+     value == -1 ? color.red :
+     color.gray
+
+
+f_dashboardPosition() =>
+    dashboardPosition == "Top Left" ? position.top_left :
+     dashboardPosition == "Top Center" ? position.top_center :
+     dashboardPosition == "Bottom Left" ? position.bottom_left :
+     dashboardPosition == "Bottom Center" ? position.bottom_center :
+     dashboardPosition == "Bottom Right" ? position.bottom_right :
+     position.top_right
+
+
+//====================================================================
+// TRENDLINES
+//====================================================================
+
+var float previousHighPrice = na
+var int previousHighBar = na
+
+var float previousLowPrice = na
+var int previousLowBar = na
+
+var line resistanceLine = na
+var line supportLine = na
+
+pivotHigh = ta.pivothigh(high, pivotLen, pivotLen)
+pivotLow = ta.pivotlow(low, pivotLen, pivotLen)
+
+if showTrendlines
+
+    if not na(pivotHigh)
+
+        currentHighPrice = pivotHigh
+        currentHighBar = bar_index - pivotLen
+
+        if not na(previousHighPrice)
+
+            if not na(resistanceLine)
+                line.delete(resistanceLine)
+
+            resistanceLine := line.new(
+                 x1=previousHighBar,
+                 y1=previousHighPrice,
+                 x2=currentHighBar,
+                 y2=currentHighPrice,
+                 xloc=xloc.bar_index,
+                 extend=extend.right,
+                 color=bearTrendColor,
+                 width=trendWidth
+             )
+
+        previousHighPrice := currentHighPrice
+        previousHighBar := currentHighBar
+
+
+    if not na(pivotLow)
+
+        currentLowPrice = pivotLow
+        currentLowBar = bar_index - pivotLen
+
+        if not na(previousLowPrice)
+
+            if not na(supportLine)
+                line.delete(supportLine)
+
+            supportLine := line.new(
+                 x1=previousLowBar,
+                 y1=previousLowPrice,
+                 x2=currentLowBar,
+                 y2=currentLowPrice,
+                 xloc=xloc.bar_index,
+                 extend=extend.right,
+                 color=bullTrendColor,
+                 width=trendWidth
+             )
+
+        previousLowPrice := currentLowPrice
+        previousLowBar := currentLowBar
+
+//====================================================================
+// FAIR VALUE GAPS
+//====================================================================
+
+bullFVG =
+     bar_index >= 2 and
+     low > high[2] and
+     (low - high[2]) >= atr * fvgMinATR
+
+bearFVG =
+     bar_index >= 2 and
+     high < low[2] and
+     (low[2] - high) >= atr * fvgMinATR
+
+
+if showFVG and bullFVG
+
+    rightEdge = extendZones ? bar_index + fvgExtendBars : bar_index
+
+    newBullFVG = box.new(
+         left=bar_index - 2,
+         top=low,
+         right=rightEdge,
+         bottom=high[2],
+         xloc=xloc.bar_index,
+         bgcolor=bullFVGColor,
+         border_color=bullFVGBorder
+     )
+
+    f_add_box(bullFVGs, newBullFVG, maxFVG)
+
+
+if showFVG and bearFVG
+
+    rightEdge = extendZones ? bar_index + fvgExtendBars : bar_index
+
+    newBearFVG = box.new(
+         left=bar_index - 2,
+         top=low[2],
+         right=rightEdge,
+         bottom=high,
+         xloc=xloc.bar_index,
+         bgcolor=bearFVGColor,
+         border_color=bearFVGBorder
+     )
+
+    f_add_box(bearFVGs, newBearFVG, maxFVG)
+
+//====================================================================
+// FVG INVALIDATION
+//====================================================================
+
+if invalidateZones
+
+    if array.size(bullFVGs) > 0
+
+        for i = array.size(bullFVGs) - 1 to 0
+
+            b = array.get(bullFVGs, i)
+
+            bottomPrice = box.get_bottom(b)
+
+            if low <= bottomPrice
+                box.delete(b)
+                array.remove(bullFVGs, i)
+
+
+    if array.size(bearFVGs) > 0
+
+        for i = array.size(bearFVGs) - 1 to 0
+
+            b = array.get(bearFVGs, i)
+
+            topPrice = box.get_top(b)
+
+            if high >= topPrice
+                box.delete(b)
+                array.remove(bearFVGs, i)
+
+//====================================================================
+// ORDER BLOCKS
+//====================================================================
+
+bullDisplacement =
+     close > open and
+     (close - open) >= atr * obATR
+
+bearDisplacement =
+     close < open and
+     (open - close) >= atr * obATR
+
+
+bullOBSignal =
+     bar_index >= 1 and
+     close[1] < open[1] and
+     bullDisplacement and
+     close > high[1]
+
+
+bearOBSignal =
+     bar_index >= 1 and
+     close[1] > open[1] and
+     bearDisplacement and
+     close < low[1]
+
+
+if showOB and bullOBSignal
+
+    rightEdge = extendZones ? bar_index + obMaxAge : bar_index
+
+    newBullOB = box.new(
+         left=bar_index - 1,
+         top=high[1],
+         right=rightEdge,
+         bottom=low[1],
+         xloc=xloc.bar_index,
+         bgcolor=bullOBColor,
+         border_color=bullOBBorder
+     )
+
+    f_add_box(bullOBs, newBullOB, maxOB)
+
+
+if showOB and bearOBSignal
+
+    rightEdge = extendZones ? bar_index + obMaxAge : bar_index
+
+    newBearOB = box.new(
+         left=bar_index - 1,
+         top=high[1],
+         right=rightEdge,
+         bottom=low[1],
+         xloc=xloc.bar_index,
+         bgcolor=bearOBColor,
+         border_color=bearOBBorder
+     )
+
+    f_add_box(bearOBs, newBearOB, maxOB)
+
+//====================================================================
+// ORDER BLOCK INVALIDATION
+//====================================================================
+
+if invalidateZones
+
+    if array.size(bullOBs) > 0
+
+        for i = array.size(bullOBs) - 1 to 0
+
+            b = array.get(bullOBs, i)
+
+            bottomPrice = box.get_bottom(b)
+
+            if close < bottomPrice
+                box.delete(b)
+                array.remove(bullOBs, i)
+
+
+    if array.size(bearOBs) > 0
+
+        for i = array.size(bearOBs) - 1 to 0
+
+            b = array.get(bearOBs, i)
+
+            topPrice = box.get_top(b)
+
+            if close > topPrice
+                box.delete(b)
+                array.remove(bearOBs, i)
+
+//====================================================================
+// RBR / DBD BASE FUNCTIONS
+//====================================================================
+
+f_valid_base(int len, float maxATR) =>
+    bool valid = true
+
+    for i = 1 to len
+
+        candleBody = math.abs(close[i] - open[i])
+
+        if candleBody > atr[i] * maxATR
+            valid := false
+
+    valid
+
+
+f_base_high(int len) =>
+    float result = high[1]
+
+    for i = 2 to len
+        result := math.max(result, high[i])
+
+    result
+
+
+f_base_low(int len) =>
+    float result = low[1]
+
+    for i = 2 to len
+        result := math.min(result, low[i])
+
+    result
+
+//====================================================================
+// RBR / DBD
+//====================================================================
+
+var int lastRBRBar = na
+var int lastDBDBar = na
+
+enoughBars = bar_index > baseLength + 2
+
+bool rbrSignal = false
+bool dbdSignal = false
+
+
+if showRBRDBD and enoughBars
+
+    firstImpulseBull =
+         close[baseLength + 1] > open[baseLength + 1] and
+         (close[baseLength + 1] - open[baseLength + 1]) >= atr[baseLength + 1] * impulseATR
+
+    continuationBull =
+         close > open and
+         (close - open) >= atr * impulseATR
+
+    validBase = f_valid_base(baseLength, baseMaxATR)
+
+    previousImpulseHigh = high[baseLength + 1]
+
+    rbrSignal :=
+         firstImpulseBull and
+         validBase and
+         continuationBull and
+         close > previousImpulseHigh
+
+
+if showRBRDBD and enoughBars
+
+    firstImpulseBear =
+         close[baseLength + 1] < open[baseLength + 1] and
+         (open[baseLength + 1] - close[baseLength + 1]) >= atr[baseLength + 1] * impulseATR
+
+    continuationBear =
+         close < open and
+         (open - close) >= atr * impulseATR
+
+    validBase = f_valid_base(baseLength, baseMaxATR)
+
+    previousImpulseLow = low[baseLength + 1]
+
+    dbdSignal :=
+         firstImpulseBear and
+         validBase and
+         continuationBear and
+         close < previousImpulseLow
+
+//====================================================================
+// CREATE RBR
+//====================================================================
+
+if rbrSignal and (na(lastRBRBar) or lastRBRBar != bar_index)
+
+    baseTop = f_base_high(baseLength)
+    baseBottom = f_base_low(baseLength)
+
+    rightEdge = extendZones ? bar_index + 100 : bar_index
+
+    newRBR = box.new(
+         left=bar_index - baseLength,
+         top=baseTop,
+         right=rightEdge,
+         bottom=baseBottom,
+         xloc=xloc.bar_index,
+         bgcolor=rbrColor,
+         border_color=rbrBorder
+     )
+
+    f_add_box(rbrZones, newRBR, maxRBRDBD)
+
+    lastRBRBar := bar_index
+
+//====================================================================
+// CREATE DBD
+//====================================================================
+
+if dbdSignal and (na(lastDBDBar) or lastDBDBar != bar_index)
+
+    baseTop = f_base_high(baseLength)
+    baseBottom = f_base_low(baseLength)
+
+    rightEdge = extendZones ? bar_index + 100 : bar_index
+
+    newDBD = box.new(
+         left=bar_index - baseLength,
+         top=baseTop,
+         right=rightEdge,
+         bottom=baseBottom,
+         xloc=xloc.bar_index,
+         bgcolor=dbdColor,
+         border_color=dbdBorder
+     )
+
+    f_add_box(dbdZones, newDBD, maxRBRDBD)
+
+    lastDBDBar := bar_index
+
+//====================================================================
+// RBR / DBD INVALIDATION
+//====================================================================
+
+if invalidateZones
+
+    if array.size(rbrZones) > 0
+
+        for i = array.size(rbrZones) - 1 to 0
+
+            b = array.get(rbrZones, i)
+
+            bottomPrice = box.get_bottom(b)
+
+            if close < bottomPrice
+                box.delete(b)
+                array.remove(rbrZones, i)
+
+
+    if array.size(dbdZones) > 0
+
+        for i = array.size(dbdZones) - 1 to 0
+
+            b = array.get(dbdZones, i)
+
+            topPrice = box.get_top(b)
+
+            if close > topPrice
+                box.delete(b)
+                array.remove(dbdZones, i)
+
+//====================================================================
+// SUPPORT / RESISTANCE ENGINE
+//====================================================================
+
+srHigh = ta.pivothigh(high, srPivotLen, srPivotLen)
+srLow = ta.pivotlow(low, srPivotLen, srPivotLen)
+
+//-----------------------------
+// New Resistance
+//-----------------------------
+
+if showSR and not na(srHigh)
+
+    level = srHigh
+    pivotATR = atr[srPivotLen]
+
+    zoneHalfWidth = pivotATR * srATRWidth
+    mergeDistance = pivotATR * srMergeATR
+
+    bool merged = false
+
+    if array.size(resistancePrices) > 0
+
+        for i = 0 to array.size(resistancePrices) - 1
+
+            existingLevel = array.get(resistancePrices, i)
+
+            if math.abs(level - existingLevel) <= mergeDistance
+
+                merged := true
+
+                oldBox = array.get(resistanceZones, i)
+
+                oldTop = box.get_top(oldBox)
+                oldBottom = box.get_bottom(oldBox)
+
+                newTop = math.max(oldTop, level + zoneHalfWidth)
+                newBottom = math.min(oldBottom, level - zoneHalfWidth)
+
+                box.set_top(oldBox, newTop)
+                box.set_bottom(oldBox, newBottom)
+
+                array.set(resistancePrices, i, (newTop + newBottom) / 2)
+
+    if not merged
+
+        leftBar = bar_index - srPivotLen
+        rightBar = bar_index + srExtension
+
+        newResistance = box.new(
+             left=leftBar,
+             top=level + zoneHalfWidth,
+             right=rightBar,
+             bottom=level - zoneHalfWidth,
+             xloc=xloc.bar_index,
+             bgcolor=resistanceColor,
+             border_color=resistanceBorder
+         )
+
+        array.push(resistanceZones, newResistance)
+        array.push(resistancePrices, level)
+
+        while array.size(resistanceZones) > maxResistance
+
+            oldResistance = array.shift(resistanceZones)
+            box.delete(oldResistance)
+
+            array.shift(resistancePrices)
+
+//-----------------------------
+// New Support
+//-----------------------------
+
+if showSR and not na(srLow)
+
+    level = srLow
+    pivotATR = atr[srPivotLen]
+
+    zoneHalfWidth = pivotATR * srATRWidth
+    mergeDistance = pivotATR * srMergeATR
+
+    bool merged = false
+
+    if array.size(supportPrices) > 0
+
+        for i = 0 to array.size(supportPrices) - 1
+
+            existingLevel = array.get(supportPrices, i)
+
+            if math.abs(level - existingLevel) <= mergeDistance
+
+                merged := true
+
+                oldBox = array.get(supportZones, i)
+
+                oldTop = box.get_top(oldBox)
+                oldBottom = box.get_bottom(oldBox)
+
+                newTop = math.max(oldTop, level + zoneHalfWidth)
+                newBottom = math.min(oldBottom, level - zoneHalfWidth)
+
+                box.set_top(oldBox, newTop)
+                box.set_bottom(oldBox, newBottom)
+
+                array.set(supportPrices, i, (newTop + newBottom) / 2)
+
+    if not merged
+
+        leftBar = bar_index - srPivotLen
+        rightBar = bar_index + srExtension
+
+        newSupport = box.new(
+             left=leftBar,
+             top=level + zoneHalfWidth,
+             right=rightBar,
+             bottom=level - zoneHalfWidth,
+             xloc=xloc.bar_index,
+             bgcolor=supportColor,
+             border_color=supportBorder
+         )
+
+        array.push(supportZones, newSupport)
+        array.push(supportPrices, level)
+
+        while array.size(supportZones) > maxSupport
+
+            oldSupport = array.shift(supportZones)
+            box.delete(oldSupport)
+
+            array.shift(supportPrices)
+
+//====================================================================
+// UPDATE S/R BOX EXTENSIONS
+//====================================================================
+
+if showSR and extendZones
+
+    if array.size(supportZones) > 0
+
+        for i = 0 to array.size(supportZones) - 1
+
+            b = array.get(supportZones, i)
+
+            box.set_right(
+                 b,
+                 bar_index + srExtension
+             )
+
+
+    if array.size(resistanceZones) > 0
+
+        for i = 0 to array.size(resistanceZones) - 1
+
+            b = array.get(resistanceZones, i)
+
+            box.set_right(
+                 b,
+                 bar_index + srExtension
+             )
+
+//====================================================================
+// BROKEN SUPPORT / RESISTANCE
+//====================================================================
+
+if removeBrokenSR
+
+    // Broken Support
+    if array.size(supportZones) > 0
+
+        for i = array.size(supportZones) - 1 to 0
+
+            b = array.get(supportZones, i)
+
+            bottom = box.get_bottom(b)
+
+            if close < bottom
+
+                box.delete(b)
+                array.remove(supportZones, i)
+                array.remove(supportPrices, i)
+
+    // Broken Resistance
+    if array.size(resistanceZones) > 0
+
+        for i = array.size(resistanceZones) - 1 to 0
+
+            b = array.get(resistanceZones, i)
+
+            top = box.get_top(b)
+
+            if close > top
+
+                box.delete(b)
+                array.remove(resistanceZones, i)
+                array.remove(resistancePrices, i)
+
+//====================================================================
+// S/R LABELS
+//====================================================================
+
+var label lastSupportLabel = na
+var label lastResistanceLabel = na
+
+if showSRLabels and showSR
+
+    if not na(srLow)
+
+        if not na(lastSupportLabel)
+            label.delete(lastSupportLabel)
+
+        lastSupportLabel := label.new(
+             x=bar_index - srPivotLen,
+             y=srLow,
+             text="SUPPORT",
+             xloc=xloc.bar_index,
+             style=label.style_label_up,
+             textcolor=color.white,
+             color=color.new(color.green, 30),
+             size=size.tiny
+         )
+
+    if not na(srHigh)
+
+        if not na(lastResistanceLabel)
+            label.delete(lastResistanceLabel)
+
+        lastResistanceLabel := label.new(
+             x=bar_index - srPivotLen,
+             y=srHigh,
+             text="RESISTANCE",
+             xloc=xloc.bar_index,
+             style=label.style_label_down,
+             textcolor=color.white,
+             color=color.new(color.red, 30),
+             size=size.tiny
+         )
+
+//====================================================================
+// SIGNAL MARKERS
+//====================================================================
+
+plotshape(
+     bullFVG and showFVG,
+     title="Bullish FVG",
+     style=shape.triangleup,
+     location=location.belowbar,
+     size=size.tiny,
+     text="FVG"
+ )
+
+plotshape(
+     bearFVG and showFVG,
+     title="Bearish FVG",
+     style=shape.triangledown,
+     location=location.abovebar,
+     size=size.tiny,
+     text="FVG"
+ )
+
+plotshape(
+     bullOBSignal and showOB,
+     title="Bullish OB",
+     style=shape.labelup,
+     location=location.belowbar,
+     size=size.tiny,
+     text="OB"
+ )
+
+plotshape(
+     bearOBSignal and showOB,
+     title="Bearish OB",
+     style=shape.labeldown,
+     location=location.abovebar,
+     size=size.tiny,
+     text="OB"
+ )
+
+plotshape(
+     rbrSignal and showRBRDBD,
+     title="RBR",
+     style=shape.labelup,
+     location=location.belowbar,
+     size=size.tiny,
+     text="RBR"
+ )
+
+plotshape(
+     dbdSignal and showRBRDBD,
+     title="DBD",
+     style=shape.labeldown,
+     location=location.abovebar,
+     size=size.tiny,
+     text="DBD"
+ )
+
+//====================================================================
+// BIAS ENGINE
+//====================================================================
+
+f_bias() =>
+
+    fast = ta.ema(close, fastEMA)
+    slow = ta.ema(close, slowEMA)
+
+    fastSlopeUp = fast > fast[slopeBars]
+    fastSlopeDown = fast < fast[slopeBars]
+
+    bullishScore =
+         (close > fast ? 1 : 0) +
+         (fast > slow ? 1 : 0) +
+         (fastSlopeUp ? 1 : 0)
+
+    bearishScore =
+         (close < fast ? 1 : 0) +
+         (fast < slow ? 1 : 0) +
+         (fastSlopeDown ? 1 : 0)
+
+    result =
+         bullishScore >= 3 ? 1 :
+         bearishScore >= 3 ? -1 :
+         0
+
+    result
+
+//====================================================================
+// MULTI-TIMEFRAME BIAS
+//====================================================================
+
+h4Bias = request.security(
+     syminfo.tickerid,
+     "240",
+     f_bias(),
+     barmerge.gaps_off,
+     barmerge.lookahead_off
+ )
+
+h1Bias = request.security(
+     syminfo.tickerid,
+     "60",
+     f_bias(),
+     barmerge.gaps_off,
+     barmerge.lookahead_off
+ )
+
+m15Bias = request.security(
+     syminfo.tickerid,
+     "15",
+     f_bias(),
+     barmerge.gaps_off,
+     barmerge.lookahead_off
+ )
+
+currentBias = f_bias()
+
+//====================================================================
+// OVERALL BIAS
+//====================================================================
+
+bullCount =
+     (h4Bias == 1 ? 1 : 0) +
+     (h1Bias == 1 ? 1 : 0) +
+     (m15Bias == 1 ? 1 : 0) +
+     (currentBias == 1 ? 1 : 0)
+
+bearCount =
+     (h4Bias == -1 ? 1 : 0) +
+     (h1Bias == -1 ? 1 : 0) +
+     (m15Bias == -1 ? 1 : 0) +
+     (currentBias == -1 ? 1 : 0)
+
+overallBias =
+     bullCount - bearCount > neutralThreshold ? 1 :
+     bearCount - bullCount > neutralThreshold ? -1 :
+     0
+
+strength = math.max(bullCount, bearCount)
+
+//====================================================================
+// BIAS DASHBOARD
+//====================================================================
+
+var table dashboard = na
+
+if showDashboard and barstate.isfirst
+
+    dashboard := table.new(
+         f_dashboardPosition(),
+         3,
+         7,
+         border_width=1
+     )
+
+if not showDashboard and not na(dashboard)
+
+    table.clear(dashboard, 0, 0, 2, 6)
+
+if showDashboard and not na(dashboard) and barstate.islast
+
+    // Header
+    table.cell(
+         dashboard,
+         0,
+         0,
+         "BIAS",
+         text_color=color.white,
+         bgcolor=color.black
+     )
+
+    table.cell(
+         dashboard,
+         1,
+         0,
+         "TREND",
+         text_color=color.white,
+         bgcolor=color.black
+     )
+
+    table.cell(
+         dashboard,
+         2,
+         0,
+         "STATE",
+         text_color=color.white,
+         bgcolor=color.black
+     )
+
+    // H4
+    table.cell(
+         dashboard,
+         0,
+         1,
+         "H4",
+         text_color=color.white,
+         bgcolor=color.new(color.black, 15)
+     )
+
+    table.cell(
+         dashboard,
+         1,
+         1,
+         f_biasArrow(h4Bias) + " " + f_biasText(h4Bias),
+         text_color=f_biasColor(h4Bias),
+         bgcolor=color.new(color.black, 15)
+     )
+
+    table.cell(
+         dashboard,
+         2,
+         1,
+         h4Bias == 1 ? "LONG" : h4Bias == -1 ? "SHORT" : "WAIT",
+         text_color=f_biasColor(h4Bias),
+         bgcolor=color.new(color.black, 15)
+     )
+
+    // H1
+    table.cell(
+         dashboard,
+         0,
+         2,
+         "H1",
+         text_color=color.white,
+         bgcolor=color.new(color.black, 15)
+     )
+
+    table.cell(
+         dashboard,
+         1,
+         2,
+         f_biasArrow(h1Bias) + " " + f_biasText(h1Bias),
+         text_color=f_biasColor(h1Bias),
+         bgcolor=color.new(color.black, 15)
+     )
+
+    table.cell(
+         dashboard,
+         2,
+         2,
+         h1Bias == 1 ? "LONG" : h1Bias == -1 ? "SHORT" : "WAIT",
+         text_color=f_biasColor(h1Bias),
+         bgcolor=color.new(color.black, 15)
+     )
+
+    // M15
+    table.cell(
+         dashboard,
+         0,
+         3,
+         "M15",
+         text_color=color.white,
+         bgcolor=color.new(color.black, 15)
+     )
+
+    table.cell(
+         dashboard,
+         1,
+         3,
+         f_biasArrow(m15Bias) + " " + f_biasText(m15Bias),
+         text_color=f_biasColor(m15Bias),
+         bgcolor=color.new(color.black, 15)
+     )
+
+    table.cell(
+         dashboard,
+         2,
+         3,
+         m15Bias == 1 ? "LONG" : m15Bias == -1 ? "SHORT" : "WAIT",
+         text_color=f_biasColor(m15Bias),
+         bgcolor=color.new(color.black, 15)
+     )
+
+    // Current timeframe
+    table.cell(
+         dashboard,
+         0,
+         4,
+         timeframe.period,
+         text_color=color.white,
+         bgcolor=color.new(color.black, 15)
+     )
+
+    table.cell(
+         dashboard,
+         1,
+         4,
+         f_biasArrow(currentBias) + " " + f_biasText(currentBias),
+         text_color=f_biasColor(currentBias),
+         bgcolor=color.new(color.black, 15)
+     )
+
+    table.cell(
+         dashboard,
+         2,
+         4,
+         currentBias == 1 ? "LONG" : currentBias == -1 ? "SHORT" : "WAIT",
+         text_color=f_biasColor(currentBias),
+         bgcolor=color.new(color.black, 15)
+     )
+
+    // Separator
+    table.cell(
+         dashboard,
+         0,
+         5,
+         "────────",
+         text_color=color.gray,
+         bgcolor=color.black
+     )
+
+    table.cell(
+         dashboard,
+         1,
+         5,
+         "────────",
+         text_color=color.gray,
+         bgcolor=color.black
+     )
+
+    table.cell(
+         dashboard,
+         2,
+         5,
+         "────────",
+         text_color=color.gray,
+         bgcolor=color.black
+     )
+
+    // Overall
+    table.cell(
+         dashboard,
+         0,
+         6,
+         "OVERALL",
+         text_color=color.white,
+         bgcolor=color.black
+     )
+
+    overallText =
+         overallBias == 1 ? "▲ BULLISH" :
+         overallBias == -1 ? "▼ BEARISH" :
+         "— NEUTRAL"
+
+    table.cell(
+         dashboard,
+         1,
+         6,
+         overallText,
+         text_color=f_biasColor(overallBias),
+         bgcolor=color.black
+     )
+
+    overallState =
+         overallBias == 1 ? "LONG BIAS" :
+         overallBias == -1 ? "SHORT BIAS" :
+         "WAIT"
+
+    if showStrength
+        overallState += " " + str.tostring(strength) + "/4"
+
+    table.cell(
+         dashboard,
+         2,
+         6,
+         overallState,
+         text_color=f_biasColor(overallBias),
+         bgcolor=color.black
+     )
+
+//====================================================================
+// ALERTS
+//====================================================================
+
+alertcondition(
+     bullFVG,
+     "Bullish FVG Created",
+     "Bullish FVG created"
+ )
+
+alertcondition(
+     bearFVG,
+     "Bearish FVG Created",
+     "Bearish FVG created"
+ )
+
+alertcondition(
+     bullOBSignal,
+     "Bullish Order Block Created",
+     "Bullish Order Block created"
+ )
+
+alertcondition(
+     bearOBSignal,
+     "Bearish Order Block Created",
+     "Bearish Order Block created"
+ )
+
+alertcondition(
+     rbrSignal,
+     "RBR Created",
+     "Rally Base Rally detected"
+ )
+
+alertcondition(
+     dbdSignal,
+     "DBD Created",
+     "Drop Base Drop detected"
+ )
+
+alertcondition(
+     not na(srLow),
+     "New Support",
+     "New support level detected"
+ )
+
+alertcondition(
+     not na(srHigh),
+     "New Resistance",
+     "New resistance level detected"
+ )
+
+alertcondition(
+     overallBias == 1 and overallBias[1] != 1,
+     "Overall Bullish Bias",
+     "Overall trend bias changed to BULLISH"
+ )
+
+alertcondition(
+     overallBias == -1 and overallBias[1] != -1,
+     "Overall Bearish Bias",
+     "Overall trend bias changed to BEARISH"
+ )
